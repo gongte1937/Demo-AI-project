@@ -1,0 +1,60 @@
+# ─── Node / npm ───────────────────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# ─── Build outputs ────────────────────────────────────────────────────────────
+dist/
+build/
+out/
+.vite/
+.turbo/
+
+# ─── Environment & secrets ────────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+
+# ─── TypeScript ───────────────────────────────────────────────────────────────
+*.tsbuildinfo
+
+# ─── Logs ─────────────────────────────────────────────────────────────────────
+logs/
+*.log
+
+# ─── Coverage & test artifacts ────────────────────────────────────────────────
+coverage/
+.nyc_output/
+
+# ─── macOS ────────────────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+__MACOSX/
+
+# ─── Editor / IDE ─────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ─── Prisma (backend) ─────────────────────────────────────────────────────────
+echolater-backend/prisma/migrations/
+echolater-backend/.prisma/
+
+# ─── Uploads / media (backend) ────────────────────────────────────────────────
+echolater-backend/uploads/
+echolater-backend/tmp/
+
+# ─── Cache ────────────────────────────────────────────────────────────────────
+.cache/
+.eslintcache
+.stylelintcache
