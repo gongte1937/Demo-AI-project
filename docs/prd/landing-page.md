@@ -1,265 +1,265 @@
-# Landing Page PRD - 临时计划生成器
+# Landing Page PRD - Temporary Plan Generator
 
-## 1. 产品概述
+## 1. Product Overview
 
-### 1.1 产品名称
-临时计划生成器 · 语音想法记录工具
+### 1.1 Product Name
+Temporary Plan Generator · Voice Idea Recording Tool
 
-### 1.2 Landing Page 目标
-- **主要目标**: 向潜在用户清晰传达产品核心价值，引导用户注册/下载
-- **次要目标**: 建立产品认知度，传递品牌调性（轻量、高效、智能）
-- **转化目标**: 获取用户邮箱/手机号，引导下载或试用
+### 1.2 Landing Page Goals
+- **Primary Goal**: Clearly communicate the product's core value to potential users and guide them to register/download
+- **Secondary Goal**: Build product awareness and convey brand identity (lightweight, efficient, intelligent)
+- **Conversion Goal**: Capture user email/phone numbers and drive downloads or trial sign-ups
 
-## 2. 目标用户
+## 2. Target Users
 
-### 2.1 核心用户画像
-- 生活节奏快、经常产生临时想法的都市人群
-- 25-45岁，职场人士、创业者、自由职业者
-- 习惯使用移动设备，对效率工具有需求
-- 痛点：想法容易遗忘，记录成本高
+### 2.1 Core User Persona
+- Urban professionals with a fast-paced lifestyle who frequently have spontaneous ideas
+- Ages 25–45, including office workers, entrepreneurs, and freelancers
+- Comfortable using mobile devices and seeking productivity tools
+- Pain point: Ideas are easily forgotten, and recording them is cumbersome
 
-### 2.2 用户访问场景
-- 通过搜索引擎查找"语音记录工具"、"想法记录"等关键词
-- 通过社交媒体广告或推荐了解产品
-- 通过朋友推荐访问
+### 2.2 User Access Scenarios
+- Discovering the product via search engines (e.g., "voice recording tool", "idea capture")
+- Reaching the landing page via social media ads or recommendations
+- Visiting via referrals from friends
 
-## 3. 核心信息架构
+## 3. Core Information Architecture
 
-### 3.1 首屏（Hero Section）
-**目标**: 3秒内让用户理解产品价值
+### 3.1 Hero Section
+**Goal**: Help users understand the product value within 3 seconds
 
-**内容要素**:
-- **主标题**: "说出来，就不会忘" / "你的想法，随口记下"
-- **副标题**: "语音记录临时想法，AI智能整理，让灵感不再溜走"
-- **核心卖点标签**:
-  - 语音输入，解放双手
-  - AI智能整理
-  - 按时间分类
-- **主CTA**: "立即开始使用"（醒目按钮）
-- **次CTA**: "观看演示视频"（次要样式）
-- **视觉元素**: 产品界面mockup展示（手机端为主）
+**Content Elements**:
+- **Main Headline**: "Say it. Never forget it." / "Your ideas, captured on the fly"
+- **Subtitle**: "Record temporary ideas by voice, let AI organize them, never lose a thought again"
+- **Core Value Tags**:
+  - Voice input, hands-free
+  - AI-powered organization
+  - Time-based categorization
+- **Primary CTA**: "Get Started Now" (prominent button)
+- **Secondary CTA**: "Watch Demo Video" (secondary style)
+- **Visual Element**: Product interface mockup (primarily mobile)
 
-### 3.2 痛点场景（Problem Section）
-**目标**: 引发共鸣，强化需求
+### 3.2 Problem Section
+**Goal**: Create resonance and reinforce the need
 
-**标题**: "这些时刻，你是否也有过？"
+**Heading**: "Sound familiar?"
 
-**场景卡片**（3-4个）:
-1. **通勤路上**
-   - 图标：🚇 / 行走的人
-   - 文案："走路时突然想到要做的事，掏手机打字太麻烦"
+**Scenario Cards** (3–4):
+1. **On Your Commute**
+   - Icon: 🚇 / walking person
+   - Copy: "You think of something important while walking, but pulling out your phone to type is too much effort"
 
-2. **会议中**
-   - 图标：💬 / 会议图标
-   - 文案："讨论时产生好想法，但会后就忘了八九成"
+2. **In a Meeting**
+   - Icon: 💬 / meeting icon
+   - Copy: "A great idea sparks during a discussion, but you've forgotten most of it by the end of the meeting"
 
-3. **睡前灵感**
-   - 图标：💡 / 夜晚图标
-   - 文案："躺在床上想到明天要做的事，但懒得起来记录"
+3. **Before Bed**
+   - Icon: 💡 / night icon
+   - Copy: "You're lying in bed thinking about tomorrow's tasks but too lazy to get up and write them down"
 
-4. **琐事堆积**
-   - 图标：📝 / 混乱图标
-   - 文案："想法零散记在各处，回头看时根本不知道从哪开始"
+4. **Scattered Thoughts**
+   - Icon: 📝 / clutter icon
+   - Copy: "Ideas scattered across different places — when you come back, you don't even know where to start"
 
-### 3.3 产品功能（Features Section）
-**目标**: 展示核心功能和差异化价值
+### 3.3 Features Section
+**Goal**: Showcase core features and differentiated value
 
-**标题**: "简单三步，想法变计划"
+**Heading**: "Three simple steps — thoughts become plans"
 
-**功能展示**（左右布局或卡片式）:
+**Feature Display** (side-by-side or card layout):
 
-1. **快速语音输入**
-   - 图标/插图：麦克风、声波
-   - 标题："随时随地，想说就说"
-   - 描述："无需打字，语音转文字，1秒记录你的想法"
-   - 亮点标签：「支持中英文混合」「识别准确率95%+」
+1. **Quick Voice Input**
+   - Icon/illustration: Microphone, sound wave
+   - Title: "Record anywhere, anytime"
+   - Description: "No typing needed — voice-to-text captures your idea in 1 second"
+   - Highlight Tags: `Bilingual support` `95%+ accuracy`
 
-2. **AI智能整理**
-   - 图标/插图：AI大脑、自动分类
-   - 标题："AI帮你理清思路"
-   - 描述："自动提取关键信息，识别时间要素，智能归类"
-   - 亮点标签：「自动提取时间」「智能分类」
+2. **AI-Powered Organization**
+   - Icon/illustration: AI brain, auto-classification
+   - Title: "Let AI do the thinking"
+   - Description: "Automatically extracts key info, identifies time references, and categorizes intelligently"
+   - Highlight Tags: `Auto time extraction` `Smart categorization`
 
-3. **时间维度分类**
-   - 图标/插图：日历、时间轴
-   - 标题："按时间整理，一目了然"
-   - 描述："今天要做、本周计划、未来安排，自动分类不混乱"
-   - 亮点标签：「今日事项」「本周计划」「未来想法」
+3. **Time-Based Categorization**
+   - Icon/illustration: Calendar, timeline
+   - Title: "Organized by time, at a glance"
+   - Description: "Today's tasks, this week's plans, future ideas — auto-categorized and clear"
+   - Highlight Tags: `Today` `This Week` `Future`
 
-4. **轻量简洁设计**
-   - 图标/插图：简洁界面
-   - 标题："不是任务管理，只做快速记录"
-   - 描述："专注于想法的记录与基础整理，不增加操作负担"
-   - 亮点标签：「零学习成本」「极简设计」
+4. **Lightweight & Simple Design**
+   - Icon/illustration: Clean interface
+   - Title: "Not a task manager — just fast capture"
+   - Description: "Focused on capturing and organizing ideas without adding cognitive overhead"
+   - Highlight Tags: `Zero learning curve` `Minimal design`
 
-### 3.4 使用流程（How It Works）
-**目标**: 降低用户理解成本
+### 3.4 How It Works Section
+**Goal**: Lower the barrier for users to understand the product
 
-**标题**: "超简单，1分钟上手"
+**Heading**: "Super simple — up and running in 1 minute"
 
-**步骤展示**（横向时间轴或纵向步骤）:
-1. **步骤一**: 打开App，点击录音按钮
-2. **步骤二**: 说出你的想法或计划
-3. **步骤三**: AI自动整理，按时间分类展示
+**Steps** (horizontal timeline or vertical):
+1. **Step 1**: Open the app and tap the record button
+2. **Step 2**: Say your idea or plan out loud
+3. **Step 3**: AI auto-organizes and displays it by time category
 
-**视觉**: 配合手机界面截图或动画演示
+**Visuals**: Accompanied by phone UI screenshots or animated demo
 
-### 3.5 用户评价（Testimonials）- 可选
-**目标**: 建立信任，提供社会证明
+### 3.5 Testimonials (Optional)
+**Goal**: Build trust through social proof
 
-**内容**:
-- 2-3条用户真实评价（如果有）
-- 用户头像（匿名或真实）+ 职业标签
-- 评价内容聚焦于解决的痛点
+**Content**:
+- 2–3 genuine user reviews (if available)
+- User avatar (anonymous or real) + occupation tag
+- Reviews focused on pain points solved
 
-示例：
-> "以前走路时想到的事，到家就忘了。现在直接说出来，晚上回顾时清清楚楚。"
-> — 张同学，产品经理
+Example:
+> "I used to forget things I thought of while walking. Now I just say them out loud, and it's all clear when I review later that evening."
+> — Zhang, Product Manager
 
-### 3.6 FAQ（常见问题）- 可选
-**目标**: 消除用户顾虑
+### 3.6 FAQ (Optional)
+**Goal**: Address user concerns
 
-**问题示例**:
-- Q: 语音识别准确吗？
-  - A: 我们使用领先的AI语音识别技术，准确率超过95%，支持中英文混合识别
+**Sample Questions**:
+- Q: Is the voice recognition accurate?
+  - A: We use leading AI speech recognition technology with over 95% accuracy, supporting bilingual (Chinese/English) input
 
-- Q: 会自动提醒我执行计划吗？
-  - A: 目前产品专注于想法记录和基础整理，暂不提供复杂的提醒功能
+- Q: Will it automatically remind me to execute my plans?
+  - A: The product currently focuses on idea capture and basic organization. Complex reminder features are not available yet.
 
-- Q: 数据安全吗？
-  - A: 所有数据加密存储，仅你本人可见
+- Q: Is my data secure?
+  - A: All data is encrypted and only visible to you.
 
-### 3.7 最终CTA（Final Call-to-Action）
-**目标**: 促成转化
+### 3.7 Final Call-to-Action
+**Goal**: Drive conversions
 
-**内容**:
-- **主标题**: "开始记录你的想法"
-- **副标题**: "加入已有X位用户的选择"（如果有数据）
-- **CTA按钮**: "免费开始使用"·
-- **补充说明**: "无需信用卡 · 30秒注册"
+**Content**:
+- **Main Headline**: "Start capturing your ideas"
+- **Subtitle**: "Join X users already on board" (if data is available)
+- **CTA Button**: "Start for Free"
+- **Supporting Text**: "No credit card required · Sign up in 30 seconds"
 
-**表单元素**:
-- 邮箱输入框
-- 手机号输入框（可选）
-- 提交按钮
+**Form Elements**:
+- Email input field
+- Phone number field (optional)
+- Submit button
 
-## 4. 设计规范
+## 4. Design Specifications
 
-### 4.1 视觉风格
-- **整体调性**: 简洁、现代、亲和
-- **色彩方案**:
-  - 主色调：舒适的蓝色/绿色系（传递效率、清晰感）
-  - 辅助色：温暖的橙色/黄色（突出CTA按钮）
-  - 背景色：浅灰或白色为主，局部使用渐变
-- **字体**:
-  - 中文：思源黑体/苹方/Inter
-  - 英文：Inter/SF Pro Display
-  - 字号：标题28-48px，正文16-18px
+### 4.1 Visual Style
+- **Overall Tone**: Clean, modern, approachable
+- **Color Scheme**:
+  - Primary: Comfortable blue/green tones (conveys efficiency and clarity)
+  - Accent: Warm orange/yellow (highlights CTA buttons)
+  - Background: Predominantly light gray or white, with gradients in specific areas
+- **Typography**:
+  - Chinese: Source Han Sans / PingFang / Inter
+  - English: Inter / SF Pro Display
+  - Size: Headings 28–48px, body text 16–18px
 
-### 4.2 布局要求
-- **响应式设计**: 适配移动端、平板、桌面端
-- **单列布局为主**: 移动端优先
-- **留白充足**: 避免信息拥挤
-- **视觉层次清晰**: 标题、正文、按钮有明确区分
+### 4.2 Layout Requirements
+- **Responsive design**: Adapts to mobile, tablet, and desktop
+- **Single-column layout**: Mobile-first
+- **Generous white space**: Avoid information overload
+- **Clear visual hierarchy**: Headings, body text, and buttons are clearly differentiated
 
-### 4.3 图标和插图
-- **风格**: 扁平化或轻拟物，保持一致性
-- **元素**: 麦克风、声波、手机、AI、时钟、清单
-- **色彩**: 与品牌色保持一致
+### 4.3 Icons and Illustrations
+- **Style**: Flat or light skeuomorphic, consistent throughout
+- **Elements**: Microphone, sound wave, phone, AI, clock, checklist
+- **Colors**: Consistent with brand colors
 
-### 4.4 动效（可选）
-- 按钮hover效果
-- 页面滚动视差
-- 功能卡片出现动画
-- CTA按钮呼吸效果
+### 4.4 Animations (Optional)
+- Button hover effect
+- Scroll parallax
+- Feature card entrance animation
+- CTA button breathing effect
 
-## 5. 技术要求
+## 5. Technical Requirements
 
-### 5.1 前端技术栈
-- **框架**: React / Vue / 原生HTML+CSS+JS
-- **样式**: Tailwind CSS / CSS Modules / Styled Components
-- **响应式**: Mobile First设计
-- **动画库**: Framer Motion / GSAP（如需复杂动画）
+### 5.1 Frontend Tech Stack
+- **Framework**: React / Vue / Vanilla HTML+CSS+JS
+- **Styling**: Tailwind CSS / CSS Modules / Styled Components
+- **Responsive**: Mobile-first design
+- **Animation library**: Framer Motion / GSAP (for complex animations)
 
-### 5.2 性能要求
-- **首屏加载**: < 2秒
-- **图片优化**: WebP格式，懒加载
-- **代码压缩**: 生产环境代码需压缩
-- **SEO优化**: Meta标签完善，语义化HTML
+### 5.2 Performance Requirements
+- **First contentful paint**: < 2 seconds
+- **Image optimization**: WebP format, lazy loading
+- **Code minification**: Production code must be minified
+- **SEO optimization**: Complete meta tags, semantic HTML
 
-### 5.3 兼容性
-- 现代浏览器：Chrome, Safari, Firefox, Edge（最新两个版本）
-- 移动端：iOS 14+, Android 10+
+### 5.3 Compatibility
+- Modern browsers: Chrome, Safari, Firefox, Edge (latest two versions)
+- Mobile: iOS 14+, Android 10+
 
-### 5.4 埋点追踪
-需追踪的用户行为:
-- 页面访问量（PV/UV）
-- 各CTA按钮点击率
-- 表单提交转化率
-- 页面停留时长
-- 各section滚动到达率
+### 5.4 Analytics Tracking
+User behaviors to track:
+- Page views (PV/UV)
+- CTA button click-through rates
+- Form submission conversion rate
+- Average time on page
+- Scroll depth per section
 
-## 6. 文案Tone & Voice
+## 6. Copy Tone & Voice
 
-### 6.1 语言风格
-- **口语化**: 避免专业术语，用日常语言
-- **简洁有力**: 每句话传递单一信息
-- **情感共鸣**: 描述用户痛点时带入感强
-- **积极正面**: 强调解决方案而非问题
+### 6.1 Language Style
+- **Conversational**: Avoid jargon, use everyday language
+- **Concise and punchy**: Each sentence delivers a single message
+- **Emotionally resonant**: Strong empathy when describing user pain points
+- **Positive and solution-focused**: Emphasize solutions rather than problems
 
-### 6.2 文案示例
+### 6.2 Copy Examples
 
-**好的示例**:
-- ✅ "说出来，就不会忘"
-- ✅ "走路时想到的事，1秒记下来"
-- ✅ "AI帮你理清思路，不用动脑整理"
+**Good examples**:
+- ✅ "Say it. Never forget it."
+- ✅ "Capture a walking idea in 1 second"
+- ✅ "Let AI organize your thoughts — no mental effort needed"
 
-**避免的示例**:
-- ❌ "基于AI的智能语音识别与自然语言处理技术"
-- ❌ "多维度任务管理系统"
-- ❌ "企业级解决方案"
+**Examples to avoid**:
+- ❌ "AI-powered speech recognition and natural language processing technology"
+- ❌ "Multi-dimensional task management system"
+- ❌ "Enterprise-grade solution"
 
-## 7. 上线清单
+## 7. Launch Checklist
 
-### 7.1 上线前检查
-- [ ] 所有文案已确认无错别字
-- [ ] 移动端适配完成
-- [ ] CTA按钮可点击，跳转正确
-- [ ] 表单验证功能正常
-- [ ] 图片加载正常，无404
-- [ ] 跨浏览器测试通过
-- [ ] 埋点代码已部署
-- [ ] SEO元信息已配置
+### 7.1 Pre-launch Checks
+- [ ] All copy reviewed and free of errors
+- [ ] Mobile adaptation complete
+- [ ] CTA buttons are clickable with correct destinations
+- [ ] Form validation works correctly
+- [ ] Images load correctly, no 404s
+- [ ] Cross-browser testing passed
+- [ ] Analytics code deployed
+- [ ] SEO meta information configured
 
-### 7.2 A/B测试计划（可选）
-- 测试不同主标题的转化率
-- 测试不同CTA按钮文案
-- 测试不同视觉风格的首屏
+### 7.2 A/B Testing Plan (Optional)
+- Test different headlines for conversion rate
+- Test different CTA button copy
+- Test different visual styles for the hero section
 
-## 8. 成功指标
+## 8. Success Metrics
 
-### 8.1 核心指标
-- **转化率**: 访问用户中注册/留资的比例（目标: >3%）
-- **CTA点击率**: 主CTA按钮点击率（目标: >10%）
-- **跳出率**: 用户快速离开的比例（目标: <60%）
-- **停留时长**: 平均页面停留时间（目标: >60秒）
+### 8.1 Core Metrics
+- **Conversion rate**: Percentage of visitors who register/sign up (target: >3%)
+- **CTA click-through rate**: Primary CTA button click rate (target: >10%)
+- **Bounce rate**: Percentage of users who leave quickly (target: <60%)
+- **Average session duration**: Average time on page (target: >60 seconds)
 
-### 8.2 次要指标
-- 各section的滚动到达率
-- 视频播放率（如有）
-- 社交分享次数
+### 8.2 Secondary Metrics
+- Scroll depth per section
+- Video play rate (if applicable)
+- Social share count
 
-## 9. 后续迭代方向
+## 9. Future Iterations
 
-- 添加产品演示视频
-- 增加用户案例/成功故事
-- 多语言版本（英文）
-- 引入产品博客/使用技巧内容
-- 增强互动元素（在线Demo）
+- Add a product demo video
+- Add user case studies / success stories
+- Multi-language version (English)
+- Introduce product blog / usage tips content
+- Add interactive elements (live demo)
 
 ---
 
-**文档版本**: v1.0
-**创建日期**: 2026-01-13
-**负责人**: [待填写]
-**状态**: 待评审
+**Document Version**: v1.0
+**Created**: 2026-01-13
+**Owner**: [TBD]
+**Status**: Pending Review

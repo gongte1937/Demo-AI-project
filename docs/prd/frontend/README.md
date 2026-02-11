@@ -1,32 +1,32 @@
-# Frontend PRD - 临时计划生成器
+# Frontend PRD - Temporary Plan Generator
 ## React Web Application
 
-## 1. 产品概述
+## 1. Product Overview
 
-### 1.1 产品名称
-临时计划生成器 · 语音想法记录工具 (Web App)
+### 1.1 Product Name
+Temporary Plan Generator · Voice Idea Recording Tool (Web App)
 
-### 1.2 产品定位
-一款基于Web的语音想法记录工具，帮助用户通过语音快速记录临时想法和计划，AI自动整理并按时间维度分类展示。
+### 1.2 Product Positioning
+A web-based voice idea recording tool that helps users quickly capture temporary thoughts and plans via voice. AI automatically organizes and categorizes them by time dimension.
 
-### 1.3 核心价值
-- **快速录入**: 语音输入，解放双手，1秒完成记录
-- **智能整理**: AI自动提取时间信息和关键内容
-- **清晰分类**: 按时间维度自动分类(今日/本周/未来)
-- **轻量简洁**: 不是复杂的任务管理工具，专注快速记录
+### 1.3 Core Value
+- **Fast Capture**: Voice input, hands-free, record in 1 second
+- **Smart Organization**: AI automatically extracts time info and key content
+- **Clear Categorization**: Auto-categorized by time (Today / This Week / Future)
+- **Lightweight & Simple**: Not a complex task manager — focused on quick capture
 
-## 2. 技术栈
+## 2. Tech Stack
 
-### 2.1 前端框架
-- **框架**: React 18+ (函数式组件 + Hooks)
-- **语言**: TypeScript
-- **构建工具**: Vite
-- **路由**: React Router v6
-- **状态管理**: Zustand / React Query
-- **UI组件库**: Ant Design / shadcn/ui
-- **样式方案**: Tailwind CSS
+### 2.1 Frontend Framework
+- **Framework**: React 18+ (Functional Components + Hooks)
+- **Language**: TypeScript
+- **Build Tool**: Vite
+- **Routing**: React Router v6
+- **State Management**: Zustand / React Query
+- **UI Component Library**: Ant Design / shadcn/ui
+- **Styling**: Tailwind CSS
 
-### 2.2 核心依赖
+### 2.2 Core Dependencies
 ```json
 {
   "react": "^18.2.0",
@@ -41,99 +41,99 @@
 }
 ```
 
-## 3. 功能需求
+## 3. Feature Requirements
 
-### 3.1 用户认证模块
-- 邮箱/密码登录注册
-- JWT Token认证
-- 记住登录状态(7天)
-- 忘记密码/重置密码
-- 个人信息管理
+### 3.1 User Authentication
+- Email/password login and registration
+- JWT token authentication
+- Stay logged in (7 days)
+- Forgot password / reset password
+- Profile management
 
-### 3.2 语音录制模块
-**录音功能**:
+### 3.2 Voice Recording Module
+**Recording Features**:
 - Web Audio API / MediaRecorder API
-- 实时音波动画显示
-- 录音暂停/继续/取消
-- 最大录音时长: 5分钟
-- 录音后播放预览
-- 手动添加文字备注
+- Real-time audio waveform animation
+- Pause / resume / cancel recording
+- Maximum recording duration: 5 minutes
+- Playback preview after recording
+- Manual text note addition
 
-**技术要点**:
-- 录音格式: WebM / WAV
-- 文件大小限制: 10MB
-- 浏览器权限请求处理
-- 录音失败降级方案
+**Technical Notes**:
+- Recording format: WebM / WAV
+- File size limit: 10MB
+- Browser permission request handling
+- Fallback for recording failures
 
-### 3.3 想法列表模块
+### 3.3 Idea List Module
 
-**时间维度分类**:
-- **今日事项** (Today) - 今天需要处理的想法
-- **本周计划** (This Week) - 本周内的计划
-- **未来安排** (Future) - 未来的想法
-- **无时间标签** (Inbox) - AI未识别出时间的想法
+**Time-Based Categorization**:
+- **Today** - Ideas that need to be addressed today
+- **This Week** - Plans for the current week
+- **Future** - Future ideas
+- **Inbox** - Ideas with no time reference identified by AI
 
-**想法卡片显示**:
-- 原始录音播放按钮
-- AI转录文本
-- 提取的时间标签
-- 分类标签
-- 创建时间
-- 操作按钮(编辑/删除/完成/分享)
+**Idea Card Display**:
+- Original recording playback button
+- AI transcription text
+- Extracted time tag
+- Category tag
+- Creation time
+- Action buttons (Edit / Delete / Complete / Share)
 
-**列表交互**:
-- 下拉刷新
-- 上滑加载更多(分页)
-- 卡片展开/折叠
-- 拖拽排序(可选)
+**List Interactions**:
+- Pull-to-refresh
+- Infinite scroll (pagination)
+- Card expand/collapse
+- Drag-to-reorder (optional)
 
-### 3.4 想法详情页
-- 完整录音播放
-- AI转录文本编辑
-- 时间信息调整
-- 标签添加/修改
-- 完成状态标记
-- 删除确认
+### 3.4 Idea Detail Page
+- Full recording playback
+- AI transcription text editing
+- Time information adjustment
+- Add/modify tags
+- Mark as complete
+- Delete confirmation
 
-### 3.5 搜索与筛选
-- 全局搜索框
-- 按关键词搜索
-- 搜索历史记录
-- 按时间范围筛选
-- 按标签筛选
-- 按完成状态筛选
-- 组合筛选
+### 3.5 Search & Filter
+- Global search bar
+- Keyword search
+- Search history
+- Filter by time range
+- Filter by tag
+- Filter by completion status
+- Combined filters
 
-### 3.6 设置页面
-- 个人信息编辑(昵称、头像)
-- 密码修改
-- 主题切换(浅色/深色)
-- 语言切换(中文/英文)
-- 录音质量设置
-- 数据导出(JSON/CSV)
-- 账号注销
-- 退出登录
+### 3.6 Settings Page
+- Profile editing (nickname, avatar)
+- Password change
+- Theme toggle (light/dark)
+- Language switch (Chinese/English)
+- Recording quality settings
+- Data export (JSON/CSV)
+- Account deletion
+- Logout
 
-## 4. 页面结构
+## 4. Page Structure
 
-### 4.1 路由设计
+### 4.1 Routing Design
 ```
-/                       首页(未登录展示Landing Page)
-├── /login              登录页
-├── /register           注册页
-├── /reset-password     重置密码
-├── /app                主应用(需认证)
-│   ├── /app/home       想法列表(主页)
-│   ├── /app/record     录音页面
-│   ├── /app/detail/:id 想法详情
-│   ├── /app/search     搜索页面
-│   └── /app/settings   设置页面
-└── /404                404页面
+/                       Home (shows Landing Page when logged out)
+├── /login              Login page
+├── /register           Registration page
+├── /reset-password     Reset password
+├── /app                Main app (requires authentication)
+│   ├── /app/home       Idea list (main page)
+│   ├── /app/record     Recording page
+│   ├── /app/detail/:id Idea detail
+│   ├── /app/search     Search page
+│   └── /app/settings   Settings page
+└── /404                404 page
 ```
 
-### 4.2 布局设计
+### 4.2 Layout Design
 
-**移动端布局** (优先):
+**Mobile Layout** (priority):
 ```
 ┌─────────────────────┐
 │   Header            │
@@ -146,12 +146,12 @@
 └─────────────────────┘
 ```
 
-底部导航:
-- 首页 (列表)
-- 录音 (中央+按钮)
-- 设置
+Bottom navigation:
+- Home (list)
+- Record (center + button)
+- Settings
 
-**桌面端布局**:
+**Desktop Layout**:
 ```
 ┌────────┬─────────────┐
 │        │   Header    │
@@ -161,11 +161,11 @@
 └────────┴─────────────┘
 ```
 
-## 5. UI/UX 设计规范
+## 5. UI/UX Design Specifications
 
-### 5.1 色彩方案
+### 5.1 Color Scheme
 ```css
-/* 浅色主题 */
+/* Light Theme */
 --primary: #4A90E2;
 --secondary: #50E3C2;
 --accent: #F5A623;
@@ -174,7 +174,7 @@
 --text-primary: #333333;
 --text-secondary: #666666;
 
-/* 深色主题 */
+/* Dark Theme */
 --primary: #4A90E2;
 --secondary: #50E3C2;
 --accent: #F5A623;
@@ -184,29 +184,29 @@
 --text-secondary: #B0B0B0;
 ```
 
-### 5.2 字体规范
-- 标题: 24-28px, bold
-- 正文: 16-18px, regular
-- 辅助文字: 12-14px, regular
+### 5.2 Typography
+- Headings: 24–28px, bold
+- Body text: 16–18px, regular
+- Secondary text: 12–14px, regular
 
-### 5.3 组件规范
-- 按钮圆角: 24px
-- 卡片圆角: 12px
-- 卡片间距: 12px
-- 输入框高度: 48px
-- 图标大小: 24px
+### 5.3 Component Specifications
+- Button border radius: 24px
+- Card border radius: 12px
+- Card spacing: 12px
+- Input field height: 48px
+- Icon size: 24px
 
-### 5.4 动效
-- 页面过渡: 300ms ease-in-out
-- 按钮点击: scale(0.95)
-- 卡片悬浮: translateY(-4px)
-- 录音动画: 音波呼吸效果
+### 5.4 Animations
+- Page transition: 300ms ease-in-out
+- Button press: scale(0.95)
+- Card hover: translateY(-4px)
+- Recording animation: audio waveform breathing effect
 
-## 6. 数据流设计
+## 6. Data Flow Design
 
-### 6.1 状态管理 (Zustand)
+### 6.1 State Management (Zustand)
 ```typescript
-// 用户状态
+// User state
 interface UserStore {
   user: User | null;
   isAuthenticated: boolean;
@@ -214,7 +214,7 @@ interface UserStore {
   logout: () => void;
 }
 
-// 想法列表状态
+// Idea list state
 interface IdeaStore {
   ideas: Idea[];
   loading: boolean;
@@ -224,7 +224,7 @@ interface IdeaStore {
   deleteIdea: (id: string) => Promise<void>;
 }
 
-// 录音状态
+// Recording state
 interface RecordStore {
   isRecording: boolean;
   audioBlob: Blob | null;
@@ -234,59 +234,59 @@ interface RecordStore {
 }
 ```
 
-### 6.2 API交互
+### 6.2 API Interactions
 ```
-POST   /api/auth/login          登录
-POST   /api/auth/register       注册
-GET    /api/ideas               获取想法列表
-POST   /api/ideas               创建想法
-PUT    /api/ideas/:id           更新想法
-DELETE /api/ideas/:id           删除想法
-POST   /api/upload/audio        上传录音
-GET    /api/ideas/search        搜索
+POST   /api/auth/login          Login
+POST   /api/auth/register       Register
+GET    /api/ideas               Get idea list
+POST   /api/ideas               Create idea
+PUT    /api/ideas/:id           Update idea
+DELETE /api/ideas/:id           Delete idea
+POST   /api/upload/audio        Upload recording
+GET    /api/ideas/search        Search
 ```
 
-## 7. 性能优化
+## 7. Performance Optimization
 
-- 路由懒加载 (React.lazy)
-- 虚拟列表 (react-window)
-- 图片懒加载
-- 防抖/节流 (搜索、滚动)
-- Service Worker缓存
-- 代码分割
-- 首屏加载目标: < 2秒
+- Route lazy loading (React.lazy)
+- Virtual list (react-window)
+- Image lazy loading
+- Debounce/throttle (search, scroll)
+- Service Worker caching
+- Code splitting
+- Target first contentful paint: < 2 seconds
 
-## 8. 兼容性
+## 8. Compatibility
 
-### 8.1 浏览器
+### 8.1 Browsers
 - Chrome 90+
 - Safari 14+
 - Firefox 88+
 - Edge 90+
 
-### 8.2 设备
+### 8.2 Devices
 - iOS 14+
 - Android 10+
-- 响应式: 375px - 1920px
+- Responsive: 375px – 1920px
 
-## 9. 安全性
+## 9. Security
 
-- XSS防护 (DOMPurify)
-- CSRF Token验证
-- HTTPS强制
-- JWT Token加密存储
-- 敏感操作二次确认
+- XSS protection (DOMPurify)
+- CSRF token validation
+- HTTPS enforced
+- JWT token encrypted storage
+- Confirmation for sensitive operations
 
-## 10. 开发规范
+## 10. Development Standards
 
-### 10.1 代码规范
-- TypeScript严格模式
+### 10.1 Code Standards
+- TypeScript strict mode
 - ESLint + Prettier
-- 组件命名: PascalCase
-- 文件命名: kebab-case
-- 函数命名: camelCase
+- Component naming: PascalCase
+- File naming: kebab-case
+- Function naming: camelCase
 
-### 10.2 组件结构
+### 10.2 Component Structure
 ```
 components/
 ├── Button/
@@ -295,49 +295,49 @@ components/
 │   └── types.ts
 ```
 
-### 10.3 Git提交规范
+### 10.3 Git Commit Convention
 ```
-feat: 新功能
-fix: 修复bug
-docs: 文档更新
-refactor: 重构
-test: 测试
-chore: 构建/工具更新
+feat: new feature
+fix: bug fix
+docs: documentation update
+refactor: refactoring
+test: tests
+chore: build/tooling updates
 ```
 
-## 11. 测试
+## 11. Testing
 
-- 单元测试: Vitest + React Testing Library
-- 测试覆盖率: > 80%
-- E2E测试: Playwright (核心流程)
+- Unit tests: Vitest + React Testing Library
+- Test coverage: > 80%
+- E2E tests: Playwright (core flows)
 
-## 12. 部署
+## 12. Deployment
 
-- 平台: Vercel / Netlify
-- 环境变量: `VITE_API_BASE_URL`
-- 自动部署: Git Push触发
-- CDN加速
+- Platform: Vercel / Netlify
+- Environment variable: `VITE_API_BASE_URL`
+- Auto-deploy: triggered on Git push
+- CDN acceleration
 
-## 13. 迭代计划
+## 13. Roadmap
 
-### Phase 1: MVP (4周)
-- 用户认证
-- 语音录制
-- 想法列表
-- 基础CRUD
+### Phase 1: MVP (4 weeks)
+- User authentication
+- Voice recording
+- Idea list
+- Basic CRUD
 
-### Phase 2: 功能完善 (3周)
-- 搜索筛选
-- 时间分类优化
-- 标签系统
+### Phase 2: Feature Completion (3 weeks)
+- Search and filters
+- Time categorization optimization
+- Tag system
 
-### Phase 3: 体验优化 (2周)
-- 深色模式
-- 性能优化
-- 动效优化
+### Phase 3: Experience Improvements (2 weeks)
+- Dark mode
+- Performance optimization
+- Animation polish
 
 ---
 
-**文档版本**: v1.0
-**创建日期**: 2026-02-10
-**状态**: Draft
+**Document Version**: v1.0
+**Created**: 2026-02-10
+**Status**: Draft

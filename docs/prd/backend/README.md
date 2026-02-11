@@ -1,32 +1,32 @@
-# Backend PRD - 临时计划生成器
+# Backend PRD - Temporary Plan Generator
 ## Node.js TypeScript Express Server
 
-## 1. 产品概述
+## 1. Product Overview
 
-### 1.1 后端定位
-为"临时计划生成器"提供RESTful API服务，处理用户认证、语音文件上传、AI转录、数据存储等核心业务逻辑。
+### 1.1 Backend Role
+Provides RESTful API services for the Temporary Plan Generator, handling user authentication, voice file upload, AI transcription, data storage, and other core business logic.
 
-### 1.2 核心职责
-- 用户认证与授权
-- 语音文件上传与存储
-- 调用AI服务进行语音转录
-- 提取时间信息和关键内容
-- 想法数据的CRUD操作
-- 数据持久化与缓存
+### 1.2 Core Responsibilities
+- User authentication and authorization
+- Voice file upload and storage
+- Calling AI services for speech transcription
+- Extracting time information and key content
+- Idea data CRUD operations
+- Data persistence and caching
 
-## 2. 技术栈
+## 2. Tech Stack
 
-### 2.1 核心技术
-- **运行环境**: Node.js 18+ LTS
-- **语言**: TypeScript 5+
-- **Web框架**: Express.js 4.18+
-- **数据库**: PostgreSQL 15+ (主数据库)
-- **缓存**: Redis 7+ (会话、缓存)
+### 2.1 Core Technologies
+- **Runtime**: Node.js 18+ LTS
+- **Language**: TypeScript 5+
+- **Web Framework**: Express.js 4.18+
+- **Database**: PostgreSQL 15+ (primary database)
+- **Cache**: Redis 7+ (sessions, caching)
 - **ORM**: Prisma / TypeORM
-- **文件存储**: AWS S3 / 阿里云OSS / MinIO
-- **AI服务**: OpenAI Whisper API / 讯飞语音 / Azure Speech
+- **File Storage**: AWS S3 / Alibaba Cloud OSS / MinIO
+- **AI Services**: OpenAI Whisper API / iFlytek Speech / Azure Speech
 
-### 2.2 核心依赖
+### 2.2 Core Dependencies
 ```json
 {
   "express": "^4.18.0",
@@ -43,9 +43,9 @@
 }
 ```
 
-## 3. 系统架构
+## 3. System Architecture
 
-### 3.1 架构设计
+### 3.1 Architecture Design
 ```
 ┌─────────────┐
 │   Client    │
@@ -53,7 +53,7 @@
        │ HTTPS
        ↓
 ┌─────────────┐
-│  Nginx/CDN  │ (反向代理/负载均衡)
+│  Nginx/CDN  │ (Reverse proxy / load balancer)
 └──────┬──────┘
        │
        ↓
@@ -76,26 +76,26 @@
 └─────────┘ └──────┘ └──────┘
 ```
 
-### 3.2 目录结构
+### 3.2 Directory Structure
 ```
 src/
-├── config/           # 配置文件
-├── controllers/      # 控制器
-├── services/         # 业务逻辑
-├── models/          # 数据模型
-├── middlewares/     # 中间件
-├── routes/          # 路由
-├── utils/           # 工具函数
-├── validators/      # 数据验证
-├── types/           # TypeScript类型定义
-└── app.ts           # 应用入口
+├── config/           # Configuration files
+├── controllers/      # Request handlers
+├── services/         # Business logic
+├── models/           # Data models
+├── middlewares/      # Middleware
+├── routes/           # API routes
+├── utils/            # Utility functions
+├── validators/       # Data validation
+├── types/            # TypeScript type definitions
+└── app.ts            # App entry point
 ```
 
-## 4. 数据库设计
+## 4. Database Design
 
-### 4.1 数据模型
+### 4.1 Data Models
 
-#### User (用户表)
+#### User Table
 ```typescript
 model User {
   id            String    @id @default(uuid())
@@ -109,19 +109,19 @@ model User {
 }
 ```
 
-#### Idea (想法表)
+#### Idea Table
 ```typescript
 model Idea {
   id              String    @id @default(uuid())
   userId          String
   user            User      @relation(fields: [userId], references: [id])
-  audioUrl        String    // 录音文件URL
-  audioFileName   String    // 文件名
-  audioDuration   Int       // 录音时长(秒)
-  transcription   String    @db.Text // AI转录文本
-  extractedTime   DateTime? // 提取的时间信息
+  audioUrl        String    // Recording file URL
+  audioFileName   String    // File name
+  audioDuration   Int       // Recording duration (seconds)
+  transcription   String    @db.Text // AI transcription text
+  extractedTime   DateTime? // Extracted time information
   timeCategory    String    // today/thisWeek/future/inbox
-  tags            String[]  // 标签数组
+  tags            String[]  // Tag array
   isCompleted     Boolean   @default(false)
   completedAt     DateTime?
   createdAt       DateTime  @default(now())
@@ -132,7 +132,7 @@ model Idea {
 }
 ```
 
-#### Session (会话表 - Redis)
+#### Session Table (Redis)
 ```typescript
 interface Session {
   userId: string;
@@ -141,12 +141,12 @@ interface Session {
 }
 ```
 
-## 5. API 设计
+## 5. API Design
 
-### 5.1 认证相关
+### 5.1 Authentication
 
 #### POST /api/auth/register
-注册新用户
+Register a new user
 ```typescript
 Request Body:
 {
@@ -166,7 +166,7 @@ Response:
 ```
 
 #### POST /api/auth/login
-用户登录
+User login
 ```typescript
 Request Body:
 {
@@ -185,7 +185,7 @@ Response:
 ```
 
 #### POST /api/auth/logout
-退出登录
+Logout
 ```typescript
 Headers:
 Authorization: Bearer <token>
@@ -197,18 +197,18 @@ Response:
 }
 ```
 
-### 5.2 想法相关
+### 5.2 Ideas
 
 #### GET /api/ideas
-获取想法列表
+Get idea list
 ```typescript
 Query Params:
 {
-  page?: number;         // 页码，默认1
-  limit?: number;        // 每页数量，默认20
+  page?: number;         // Page number, default 1
+  limit?: number;        // Items per page, default 20
   timeCategory?: string; // today/thisWeek/future/inbox
   isCompleted?: boolean;
-  search?: string;       // 搜索关键词
+  search?: string;       // Search keyword
 }
 
 Response:
@@ -227,12 +227,12 @@ Response:
 ```
 
 #### POST /api/ideas
-创建新想法(上传录音)
+Create a new idea (upload recording)
 ```typescript
 Request (multipart/form-data):
 {
-  audio: File,           // 录音文件
-  manualNote?: string    // 手动备注
+  audio: File,           // Recording file
+  manualNote?: string    // Manual note
 }
 
 Response:
@@ -245,7 +245,7 @@ Response:
 ```
 
 #### GET /api/ideas/:id
-获取想法详情
+Get idea details
 ```typescript
 Response:
 {
@@ -257,7 +257,7 @@ Response:
 ```
 
 #### PUT /api/ideas/:id
-更新想法
+Update idea
 ```typescript
 Request Body:
 {
@@ -278,7 +278,7 @@ Response:
 ```
 
 #### DELETE /api/ideas/:id
-删除想法
+Delete idea
 ```typescript
 Response:
 {
@@ -287,10 +287,10 @@ Response:
 }
 ```
 
-### 5.3 用户相关
+### 5.3 User
 
 #### GET /api/user/profile
-获取用户信息
+Get user profile
 ```typescript
 Response:
 {
@@ -302,7 +302,7 @@ Response:
 ```
 
 #### PUT /api/user/profile
-更新用户信息
+Update user profile
 ```typescript
 Request Body:
 {
@@ -320,7 +320,7 @@ Response:
 ```
 
 #### POST /api/user/change-password
-修改密码
+Change password
 ```typescript
 Request Body:
 {
@@ -335,10 +335,10 @@ Response:
 }
 ```
 
-### 5.4 文件上传
+### 5.4 File Upload
 
 #### POST /api/upload/audio
-上传录音文件
+Upload audio file
 ```typescript
 Request (multipart/form-data):
 {
@@ -357,36 +357,36 @@ Response:
 }
 ```
 
-## 6. 核心业务逻辑
+## 6. Core Business Logic
 
-### 6.1 语音转录流程
+### 6.1 Speech Transcription Flow
 ```
-1. 接收录音文件
+1. Receive audio file
    ↓
-2. 验证文件格式和大小
+2. Validate file format and size
    ↓
-3. 上传到对象存储(S3)
+3. Upload to object storage (S3)
    ↓
-4. 调用AI转录服务(OpenAI Whisper)
+4. Call AI transcription service (OpenAI Whisper)
    ↓
-5. 提取时间信息(NLP处理)
+5. Extract time information (NLP processing)
    ↓
-6. 智能分类(today/thisWeek/future)
+6. Auto-categorize (today/thisWeek/future)
    ↓
-7. 保存到数据库
+7. Save to database
    ↓
-8. 返回结果给客户端
+8. Return result to client
 ```
 
-### 6.2 时间提取与分类
+### 6.2 Time Extraction and Categorization
 
-**时间提取规则**:
-- "明天" → 次日日期
-- "下周三" → 计算具体日期
-- "3月15日" → 转换为标准日期
-- "晚上8点" → 补充日期信息
+**Time extraction rules**:
+- "Tomorrow" → next day's date
+- "Next Wednesday" → calculate the specific date
+- "March 15th" → convert to standard date
+- "8pm tonight" → append date info
 
-**分类逻辑**:
+**Categorization logic**:
 ```typescript
 function categorizeByTime(extractedTime: Date | null): string {
   if (!extractedTime) return 'inbox';
@@ -401,7 +401,7 @@ function categorizeByTime(extractedTime: Date | null): string {
 }
 ```
 
-### 6.3 AI服务集成
+### 6.3 AI Service Integration
 
 **OpenAI Whisper API**:
 ```typescript
@@ -415,25 +415,25 @@ async function transcribeAudio(audioUrl: string): Promise<string> {
 }
 ```
 
-**备选方案**: 讯飞语音、Azure Speech、Google Cloud Speech
+**Fallback providers**: iFlytek Speech, Azure Speech, Google Cloud Speech
 
-## 7. 安全设计
+## 7. Security Design
 
-### 7.1 认证与授权
-- **JWT Token**: 有效期7天，存储在Redis
-- **密码加密**: bcrypt (salt rounds: 10)
-- **Rate Limiting**: 限制API请求频率
-- **CORS配置**: 仅允许白名单域名
+### 7.1 Authentication & Authorization
+- **JWT Token**: 7-day expiry, stored in Redis
+- **Password hashing**: bcrypt (salt rounds: 10)
+- **Rate limiting**: Restrict API request frequency
+- **CORS configuration**: Allow whitelisted domains only
 
-### 7.2 数据安全
-- **SQL注入防护**: 使用Prisma ORM参数化查询
-- **XSS防护**: 输入内容过滤和转义
-- **文件上传验证**: 限制文件类型、大小
-- **敏感数据加密**: 环境变量存储密钥
+### 7.2 Data Security
+- **SQL injection protection**: Use Prisma ORM parameterized queries
+- **XSS protection**: Input content filtering and escaping
+- **File upload validation**: Restrict file types and sizes
+- **Sensitive data encryption**: Store secrets in environment variables
 
-### 7.3 访问控制
+### 7.3 Access Control
 ```typescript
-// 认证中间件
+// Authentication middleware
 async function authenticate(req, res, next) {
   const token = req.headers.authorization?.replace('Bearer ', '');
   if (!token) return res.status(401).json({ error: 'Unauthorized' });
@@ -443,7 +443,7 @@ async function authenticate(req, res, next) {
   next();
 }
 
-// 资源所有权验证
+// Resource ownership validation
 async function authorizeIdeaOwner(req, res, next) {
   const idea = await prisma.idea.findUnique({ where: { id: req.params.id } });
   if (idea.userId !== req.user.id) {
@@ -453,38 +453,38 @@ async function authorizeIdeaOwner(req, res, next) {
 }
 ```
 
-## 8. 性能优化
+## 8. Performance Optimization
 
-### 8.1 缓存策略
-- **Redis缓存**: 用户会话、热点数据
-- **缓存时间**: 用户信息(1小时)、想法列表(5分钟)
-- **缓存失效**: 数据更新时主动清除
+### 8.1 Caching Strategy
+- **Redis cache**: User sessions, hot data
+- **Cache TTL**: User info (1 hour), idea list (5 minutes)
+- **Cache invalidation**: Proactively clear on data updates
 
-### 8.2 数据库优化
-- **索引**: userId, timeCategory, createdAt
-- **分页查询**: 限制单次查询数量
-- **连接池**: 复用数据库连接
+### 8.2 Database Optimization
+- **Indexes**: userId, timeCategory, createdAt
+- **Paginated queries**: Limit per-query result size
+- **Connection pooling**: Reuse database connections
 
-### 8.3 文件处理
-- **异步上传**: 后台任务队列(Bull)
-- **CDN加速**: 静态资源通过CDN分发
-- **文件压缩**: 录音文件压缩存储
+### 8.3 File Handling
+- **Async upload**: Background task queue (Bull)
+- **CDN acceleration**: Serve static assets via CDN
+- **File compression**: Compress audio files for storage
 
-## 9. 错误处理
+## 9. Error Handling
 
-### 9.1 统一错误响应
+### 9.1 Unified Error Response
 ```typescript
 {
   success: false,
   error: {
     code: string,      // ERROR_CODE
-    message: string,   // 用户友好的错误信息
-    details?: any      // 详细错误信息(开发环境)
+    message: string,   // User-friendly error message
+    details?: any      // Detailed error info (development only)
   }
 }
 ```
 
-### 9.2 错误码定义
+### 9.2 Error Code Definitions
 ```typescript
 enum ErrorCode {
   UNAUTHORIZED = 'UNAUTHORIZED',
@@ -497,41 +497,41 @@ enum ErrorCode {
 }
 ```
 
-## 10. 日志与监控
+## 10. Logging & Monitoring
 
-### 10.1 日志系统
-使用Winston记录日志:
-- **Error级别**: 系统错误、异常
-- **Warn级别**: 业务警告
-- **Info级别**: 重要操作(登录、创建、删除)
-- **Debug级别**: 调试信息(开发环境)
+### 10.1 Logging System
+Using Winston for logging:
+- **Error level**: System errors, exceptions
+- **Warn level**: Business warnings
+- **Info level**: Important operations (login, create, delete)
+- **Debug level**: Debug information (development only)
 
-### 10.2 监控指标
-- API响应时间
-- 数据库查询耗时
-- 错误率
-- AI转录成功率
-- 文件上传成功率
+### 10.2 Monitoring Metrics
+- API response time
+- Database query latency
+- Error rate
+- AI transcription success rate
+- File upload success rate
 
-## 11. 测试
+## 11. Testing
 
-### 11.1 单元测试
-- Service层测试覆盖率 > 80%
-- 测试框架: Jest
-- Mock: 数据库、外部API
+### 11.1 Unit Tests
+- Service layer coverage > 80%
+- Testing framework: Jest
+- Mocks: database, external APIs
 
-### 11.2 集成测试
-- API端到端测试
-- 使用Supertest
-- 测试数据库: PostgreSQL Test Instance
+### 11.2 Integration Tests
+- API end-to-end tests
+- Using Supertest
+- Test database: PostgreSQL test instance
 
-### 11.3 性能测试
-- 负载测试: Apache Bench / k6
-- 目标: API响应时间 < 500ms
+### 11.3 Performance Tests
+- Load testing: Apache Bench / k6
+- Target: API response time < 500ms
 
-## 12. 部署方案
+## 12. Deployment
 
-### 12.1 环境配置
+### 12.1 Environment Configuration
 ```env
 NODE_ENV=production
 PORT=3000
@@ -542,10 +542,10 @@ AWS_S3_BUCKET=xxx
 OPENAI_API_KEY=xxx
 ```
 
-### 12.2 部署平台
-- **推荐**: Railway / Render / Fly.io
-- **备选**: AWS EC2 / DigitalOcean / 阿里云ECS
-- **容器化**: Docker + Docker Compose
+### 12.2 Deployment Platforms
+- **Recommended**: Railway / Render / Fly.io
+- **Alternatives**: AWS EC2 / DigitalOcean / Alibaba Cloud ECS
+- **Containerization**: Docker + Docker Compose
 
 ### 12.3 CI/CD
 ```yaml
@@ -556,40 +556,40 @@ OPENAI_API_KEY=xxx
 - Deploy to Production
 ```
 
-## 13. 扩展性设计
+## 13. Extensibility Design
 
-### 13.1 微服务拆分(未来)
-- 认证服务
-- 核心业务服务
-- AI转录服务
-- 文件服务
+### 13.1 Microservice Split (Future)
+- Auth service
+- Core business service
+- AI transcription service
+- File service
 
-### 13.2 消息队列
-- 使用Bull/BullMQ处理异步任务
-- 任务: AI转录、邮件发送、数据导出
+### 13.2 Message Queue
+- Use Bull/BullMQ for async task processing
+- Tasks: AI transcription, email sending, data export
 
-## 14. 迭代计划
+## 14. Roadmap
 
-### Phase 1: MVP (4周)
-- 用户认证API
-- 想法CRUD API
-- 文件上传
-- 基础AI转录
+### Phase 1: MVP (4 weeks)
+- User authentication API
+- Idea CRUD API
+- File upload
+- Basic AI transcription
 
-### Phase 2: 功能完善 (3周)
-- 搜索API
-- 时间提取优化
-- 标签系统
-- 缓存优化
+### Phase 2: Feature Completion (3 weeks)
+- Search API
+- Time extraction optimization
+- Tag system
+- Cache optimization
 
-### Phase 3: 性能优化 (2周)
-- 数据库优化
-- Redis缓存
-- 异步任务队列
-- 监控告警
+### Phase 3: Performance Optimization (2 weeks)
+- Database optimization
+- Redis caching
+- Async task queue
+- Monitoring & alerting
 
 ---
 
-**文档版本**: v1.0
-**创建日期**: 2026-02-10
-**状态**: Draft
+**Document Version**: v1.0
+**Created**: 2026-02-10
+**Status**: Draft

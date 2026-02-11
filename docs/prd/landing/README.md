@@ -1,236 +1,236 @@
-# Landing Page PRD - 临时计划生成器
+# Landing Page PRD - Temporary Plan Generator
 ## FoodMart Template Customization Guide
 
-## 1. 产品概述
+## 1. Product Overview
 
-### 1.1 项目说明
-- **模板来源**: FoodMart-1.0.0 HTML Template
-- **目标**: 修改模板文案和内容，用于展示"临时计划生成器·语音想法记录工具"
-- **技术栈**: HTML/CSS/JavaScript (现有模板)
-- **工作范围**: 仅修改文案、图片替换、样式微调，不改变页面结构
+### 1.1 Project Description
+- **Template Source**: FoodMart-1.0.0 HTML Template
+- **Goal**: Modify the template copy and content for presenting the "Temporary Plan Generator · Voice Idea Recording Tool"
+- **Tech Stack**: HTML/CSS/JavaScript (existing template)
+- **Scope of Work**: Copy changes, image replacement, and minor style tweaks only — no structural changes
 
-### 1.2 产品定位
-**临时计划生成器** - 语音想法记录工具
-- 帮助用户快速记录临时想法和计划
-- 通过语音输入，AI智能整理
-- 按时间维度自动分类
+### 1.2 Product Positioning
+**Temporary Plan Generator** - Voice Idea Recording Tool
+- Helps users quickly capture temporary ideas and plans
+- Voice input with AI-powered organization
+- Automatic time-based categorization
 
-## 2. 页面结构映射
+## 2. Page Structure Mapping
 
-### 2.1 原模板 → 新产品映射关系
+### 2.1 Original Template → New Product Mapping
 
-| FoodMart 原始部分 | 修改为新产品内容 |
-|------------------|----------------|
-| 导航栏 (Food Categories) | 产品功能导航 (功能、使用场景、下载) |
-| Hero Banner (食品展示) | 产品核心价值展示 |
-| Category Icons (食品分类) | 核心功能图标 (语音输入、AI整理、时间分类) |
-| Product Grid (产品列表) | 使用场景卡片 |
-| Testimonials (客户评价) | 用户评价 |
-| Blog/News Section | FAQ 或使用技巧 |
-| Footer | 下载链接、社交媒体、联系方式 |
+| FoodMart Original Section | Updated to New Product Content |
+|--------------------------|-------------------------------|
+| Navigation (Food Categories) | Product feature navigation (Features, Use Cases, Download) |
+| Hero Banner (food display) | Core product value showcase |
+| Category Icons (food categories) | Core feature icons (Voice Input, AI Organization, Time Categorization) |
+| Product Grid (product list) | Use case cards |
+| Testimonials (customer reviews) | User reviews |
+| Blog/News Section | FAQ or usage tips |
+| Footer | Download links, social media, contact info |
 
-## 3. 文案修改清单
+## 3. Copy Modification Checklist
 
-### 3.1 导航栏 (Navigation)
+### 3.1 Navigation
 
-**原文案**:
+**Original copy**:
 ```
 Home | Shop | Pages | Blog | Contact
 ```
 
-**新文案**:
+**New copy**:
 ```
-首页 | 功能介绍 | 使用场景 | 下载 | 帮助中心
-```
-
-### 3.2 首屏 Hero Section
-
-**主标题 (H1)**:
-```
-说出来，就不会忘
+Home | Features | Use Cases | Download | Help Center
 ```
 
-**副标题**:
-```
-语音记录临时想法，AI智能整理，让灵感不再溜走
-```
+### 3.2 Hero Section
 
-**CTA按钮**:
+**Main Headline (H1)**:
 ```
-立即开始使用
+Say it. Never forget it.
 ```
 
-**次要按钮**:
+**Subtitle**:
 ```
-观看演示视频
-```
-
-### 3.3 核心功能区 (Features Section)
-
-替换原有的食品分类图标区域，改为3个核心功能卡片:
-
-#### 功能卡片 1: 快速语音输入
-- **图标**: 麦克风 icon (替换原蔬菜图标)
-- **标题**: "随时随地，想说就说"
-- **描述**: "无需打字，语音转文字，1秒记录你的想法"
-- **标签**: 中英文混合 · 识别准确率95%+
-
-#### 功能卡片 2: AI智能整理
-- **图标**: AI/大脑 icon (替换原面包图标)
-- **标题**: "AI帮你理清思路"
-- **描述**: "自动提取关键信息，识别时间要素，智能归类"
-- **标签**: 自动提取时间 · 智能分类
-
-#### 功能卡片 3: 时间维度分类
-- **图标**: 日历/时钟 icon (替换原肉类图标)
-- **标题**: "按时间整理，一目了然"
-- **描述**: "今天要做、本周计划、未来安排，自动分类不混乱"
-- **标签**: 今日事项 · 本周计划 · 未来想法
-
-### 3.4 使用场景区 (Use Cases - 替换Product Grid)
-
-将原产品展示网格改为使用场景卡片:
-
-#### 场景 1: 通勤路上
-- **图标**: 🚇
-- **标题**: "通勤灵感不遗漏"
-- **描述**: "走路时突然想到要做的事，语音记录，解放双手"
-
-#### 场景 2: 会议讨论
-- **图标**: 💬
-- **标题**: "会议要点快速记"
-- **描述**: "讨论时产生好想法，一键录音，会后不会忘"
-
-#### 场景 3: 睡前计划
-- **图标**: 💡
-- **标题**: "睡前想法轻松存"
-- **描述**: "躺在床上想到明天的事，语音记录，无需起身"
-
-#### 场景 4: 灵感捕捉
-- **图标**: ✨
-- **标题**: "零散想法智能整理"
-- **描述**: "随时记录的想法，AI自动分类，回顾一目了然"
-
-### 3.5 用户评价 (Testimonials)
-
-**保留评价模块结构**，修改内容:
-
-#### 评价 1:
-```
-"以前走路时想到的事，到家就忘了。现在直接说出来，晚上回顾时清清楚楚。"
-— 张同学，产品经理
+Record ideas by voice, let AI organize them, and never lose a thought again.
 ```
 
-#### 评价 2:
+**Primary CTA Button**:
 ```
-"开会时经常冒出好想法，但会后就记不清了。有了这个工具，随时录音，非常方便。"
-— 李女士，创业者
-```
-
-#### 评价 3:
-```
-"睡前躺在床上，想到第二天要做的事，不用起来写了，语音记录超省事。"
-— 王先生，自由职业者
+Get Started Now
 ```
 
-### 3.6 FAQ 区域 (替换Blog Section)
-
-**标题**: "常见问题"
-
-**Q1**: 语音识别准确吗？
-**A1**: 我们使用领先的AI语音识别技术，准确率超过95%，支持中英文混合识别。
-
-**Q2**: 会自动提醒我执行计划吗？
-**A2**: 目前产品专注于想法记录和基础整理，暂不提供复杂的提醒功能。
-
-**Q3**: 数据安全吗？
-**A3**: 所有数据加密存储，仅你本人可见，我们不会访问或分享您的数据。
-
-### 3.7 页脚 (Footer)
-
-**公司信息**:
+**Secondary Button**:
 ```
-临时计划生成器
-让灵感不再溜走
+Watch Demo Video
 ```
 
-**快速链接**:
+### 3.3 Core Features Section
+
+Replace the original food category icon area with 3 core feature cards:
+
+#### Feature Card 1: Quick Voice Input
+- **Icon**: Microphone icon (replaces vegetable icon)
+- **Title**: "Record anywhere, anytime"
+- **Description**: "No typing needed — voice-to-text captures your idea in 1 second"
+- **Tags**: Bilingual support · 95%+ accuracy
+
+#### Feature Card 2: AI-Powered Organization
+- **Icon**: AI/brain icon (replaces bread icon)
+- **Title**: "Let AI do the thinking"
+- **Description**: "Automatically extracts key info, identifies time references, and categorizes intelligently"
+- **Tags**: Auto time extraction · Smart categorization
+
+#### Feature Card 3: Time-Based Categorization
+- **Icon**: Calendar/clock icon (replaces meat icon)
+- **Title**: "Organized by time, at a glance"
+- **Description**: "Today's tasks, this week's plans, future ideas — auto-categorized and clear"
+- **Tags**: Today · This Week · Future
+
+### 3.4 Use Cases Section (replaces Product Grid)
+
+Replace the original product grid with use case cards:
+
+#### Use Case 1: On Your Commute
+- **Icon**: 🚇
+- **Title**: "Never miss a commute idea"
+- **Description**: "Hands-free voice capture while walking — no need to stop and type"
+
+#### Use Case 2: In a Meeting
+- **Icon**: 💬
+- **Title**: "Capture meeting ideas instantly"
+- **Description**: "One tap to record great ideas during discussions — never forget them after"
+
+#### Use Case 3: Before Bed
+- **Icon**: 💡
+- **Title**: "Save bedtime thoughts effortlessly"
+- **Description**: "Remember tomorrow's tasks while lying down — no need to get up and write"
+
+#### Use Case 4: Capturing Inspiration
+- **Icon**: ✨
+- **Title**: "AI organizes scattered thoughts"
+- **Description**: "Capture ideas on the go, let AI categorize them, and review with ease"
+
+### 3.5 Testimonials
+
+**Keep the testimonial section structure**, update the content:
+
+#### Review 1:
 ```
-产品功能
-使用场景
-下载应用
-帮助中心
-隐私政策
+"I used to forget things I thought of while walking. Now I just say it out loud, and it's all clear when I review later that evening."
+— Zhang, Product Manager
 ```
 
-**下载按钮**:
+#### Review 2:
 ```
-App Store 下载
-Google Play 下载
+"Great ideas always came up during meetings, but I'd forget the details afterwards. This tool lets me record on the spot — so convenient."
+— Li, Entrepreneur
 ```
 
-**社交媒体**:
+#### Review 3:
 ```
-微信公众号
-小红书
+"I'd think of things to do the next day while lying in bed. Now I don't have to get up — just record by voice. Super easy."
+— Wang, Freelancer
+```
+
+### 3.6 FAQ Section (replaces Blog Section)
+
+**Heading**: "Frequently Asked Questions"
+
+**Q1**: Is the voice recognition accurate?
+**A1**: We use leading AI speech recognition technology with over 95% accuracy, supporting bilingual (Chinese/English) input.
+
+**Q2**: Will it automatically remind me to execute my plans?
+**A2**: The product currently focuses on idea capture and basic organization. Complex reminder features are not available yet.
+
+**Q3**: Is my data secure?
+**A3**: All data is encrypted and only visible to you. We never access or share your data.
+
+### 3.7 Footer
+
+**Brand Info**:
+```
+Temporary Plan Generator
+Never lose a thought again.
+```
+
+**Quick Links**:
+```
+Features
+Use Cases
+Download App
+Help Center
+Privacy Policy
+```
+
+**Download Buttons**:
+```
+Download on App Store
+Get it on Google Play
+```
+
+**Social Media**:
+```
+WeChat Official Account
+Xiaohongshu
 Twitter
 ```
 
-## 4. 图片替换清单
+## 4. Image Replacement Checklist
 
-### 4.1 主要图片
+### 4.1 Key Images
 
-| 原图片用途 | 新图片需求 | 尺寸参考 |
-|-----------|----------|---------|
-| Banner 背景 | 简洁现代背景图 (蓝色/绿色渐变) | 1920x800px |
-| Logo | 产品 Logo | 200x60px |
-| 产品缩略图 | 手机界面截图 (App mockup) | 400x600px |
-| 图标 icon | 麦克风、AI、日历图标 | 100x100px |
-| 场景配图 | 通勤、会议、睡前等场景插画 | 600x400px |
+| Original Image Use | New Image Requirement | Size Reference |
+|-------------------|-----------------------|----------------|
+| Banner background | Clean, modern background (blue/green gradient) | 1920x800px |
+| Logo | Product logo | 200x60px |
+| Product thumbnails | Phone UI screenshots (App mockup) | 400x600px |
+| Icons | Microphone, AI, calendar icons | 100x100px |
+| Use case images | Commute, meeting, bedtime scenario illustrations | 600x400px |
 
-### 4.2 图片文件映射
+### 4.2 Image File Mapping
 
 ```
-images/logo.png → 替换为产品 Logo
-images/banner-image-1.jpg → 首屏产品展示图
-images/product-thumb-*.png → 手机界面截图
-images/icon-vegetables-broccoli.png → 麦克风图标
-images/icon-bread-baguette.png → AI图标
-images/icon-wine-glass-bottle.png → 日历图标
+images/logo.png → Replace with product logo
+images/banner-image-1.jpg → Hero product showcase image
+images/product-thumb-*.png → Phone UI screenshots
+images/icon-vegetables-broccoli.png → Microphone icon
+images/icon-bread-baguette.png → AI icon
+images/icon-wine-glass-bottle.png → Calendar icon
 ```
 
-## 5. 样式调整
+## 5. Style Adjustments
 
-### 5.1 色彩方案
+### 5.1 Color Scheme
 
-**主色调**:
+**Primary Colors**:
 ```css
---primary-color: #4A90E2; /* 舒适蓝色 */
---secondary-color: #50E3C2; /* 辅助绿色 */
---accent-color: #F5A623; /* 强调橙色 - CTA按钮 */
+--primary-color: #4A90E2; /* Comfortable blue */
+--secondary-color: #50E3C2; /* Accent green */
+--accent-color: #F5A623; /* Highlight orange - CTA buttons */
 ```
 
-**背景色**:
+**Background Colors**:
 ```css
 --bg-light: #F8F9FA;
 --bg-white: #FFFFFF;
 ```
 
-### 5.2 字体调整
+### 5.2 Font Adjustments
 
-**中文字体**:
+**Chinese Font**:
 ```css
 font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
 ```
 
-**英文字体** (保持原有):
+**English Font** (keep original):
 ```css
 font-family: 'Nunito', 'Open Sans', sans-serif;
 ```
 
-### 5.3 按钮样式
+### 5.3 Button Styles
 
-**主CTA按钮**:
+**Primary CTA Button**:
 ```css
 background: linear-gradient(135deg, #F5A623, #FF8C00);
 border-radius: 30px;
@@ -239,96 +239,96 @@ font-size: 18px;
 font-weight: bold;
 ```
 
-## 6. 修改优先级
+## 6. Implementation Priority
 
-### 6.1 高优先级 (P0)
-- [x] 导航栏文案修改
-- [x] 首屏标题和副标题
-- [x] CTA按钮文案
-- [x] 核心功能卡片文案
-- [x] Logo 替换
+### 6.1 High Priority (P0)
+- [x] Navigation copy update
+- [x] Hero headline and subtitle
+- [x] CTA button copy
+- [x] Core feature card copy
+- [x] Logo replacement
 
-### 6.2 中优先级 (P1)
-- [x] 使用场景卡片内容
-- [x] 用户评价内容
-- [x] FAQ 文案
-- [x] 页脚信息修改
+### 6.2 Medium Priority (P1)
+- [x] Use case card content
+- [x] Testimonial content
+- [x] FAQ copy
+- [x] Footer information
 
-### 6.3 低优先级 (P2)
-- [ ] 图片全面替换
-- [ ] 样式微调优化
-- [ ] 动效添加
-- [ ] 多语言版本
+### 6.3 Low Priority (P2)
+- [ ] Full image replacement
+- [ ] Style fine-tuning
+- [ ] Animations
+- [ ] Multi-language support
 
-## 7. 实施步骤
+## 7. Implementation Steps
 
-### Step 1: 文案替换
-1. 修改 `index.html` 中的所有文字内容
-2. 参照上述文案清单逐一替换
-3. 保持HTML结构不变
+### Step 1: Copy Replacement
+1. Update all text content in `index.html`
+2. Replace copy item by item following the checklist above
+3. Keep the HTML structure unchanged
 
-### Step 2: Logo和图标替换
-1. 准备新的 Logo 和功能图标
-2. 替换 `images/` 目录中的对应文件
-3. 保持文件名一致，避免修改HTML引用
+### Step 2: Logo and Icon Replacement
+1. Prepare new logo and feature icons
+2. Replace corresponding files in the `images/` directory
+3. Keep filenames consistent to avoid updating HTML references
 
-### Step 3: 样式调整
-1. 修改 `style.css` 中的颜色变量
-2. 调整按钮样式
-3. 优化字体显示
+### Step 3: Style Adjustments
+1. Update color variables in `style.css`
+2. Adjust button styles
+3. Optimize font rendering
 
-### Step 4: 测试验证
-1. 在桌面端浏览器测试
-2. 在移动端测试响应式
-3. 检查所有链接和按钮
+### Step 4: Testing
+1. Test in desktop browsers
+2. Test responsive layout on mobile
+3. Verify all links and buttons
 
-## 8. 注意事项
+## 8. Considerations
 
-### 8.1 保持原有优势
-- ✅ 保持模板的响应式布局
-- ✅ 保留动画和交互效果
-- ✅ 维持良好的性能表现
+### 8.1 Preserve Original Strengths
+- ✅ Maintain the template's responsive layout
+- ✅ Keep animations and interactive effects
+- ✅ Maintain good performance
 
-### 8.2 避免过度修改
-- ❌ 不改变页面结构
-- ❌ 不重写 JavaScript 逻辑
-- ❌ 不新增复杂功能
+### 8.2 Avoid Over-Modification
+- ❌ Do not change the page structure
+- ❌ Do not rewrite JavaScript logic
+- ❌ Do not add complex new features
 
-### 8.3 优化建议
-- 简化原模板中电商相关功能(购物车、支付等)
-- 移除不需要的产品列表页面
-- 保留单页展示，优化加载速度
+### 8.3 Optimization Recommendations
+- Remove e-commerce-related features from the original template (shopping cart, payment, etc.)
+- Remove unnecessary product listing pages
+- Keep a single-page layout and optimize load speed
 
-## 9. 验收标准
+## 9. Acceptance Criteria
 
-### 9.1 内容完整性
-- [x] 所有文案已替换为产品相关内容
-- [x] 无残留原FoodMart相关文字
-- [x] Logo和主要图片已更新
+### 9.1 Content Completeness
+- [x] All copy updated to product-related content
+- [x] No remaining FoodMart-related text
+- [x] Logo and major images updated
 
-### 9.2 功能正常
-- [ ] 导航链接可点击(可暂时指向锚点)
-- [ ] CTA按钮可点击(可暂时是占位链接)
-- [ ] 响应式布局正常
-- [ ] 移动端显示正常
+### 9.2 Functionality
+- [ ] Navigation links are clickable (can temporarily point to anchors)
+- [ ] CTA buttons are clickable (can temporarily use placeholder links)
+- [ ] Responsive layout works correctly
+- [ ] Mobile display is correct
 
-### 9.3 视觉效果
-- [ ] 品牌色调已应用
-- [ ] 字体显示清晰
-- [ ] 图片加载正常
-- [ ] 整体风格统一
+### 9.3 Visual Quality
+- [ ] Brand colors applied
+- [ ] Fonts display clearly
+- [ ] Images load correctly
+- [ ] Overall style is consistent
 
-## 10. 后续优化方向
+## 10. Future Improvements
 
-- 添加真实产品截图和演示视频
-- 集成邮件收集表单
-- 添加Google Analytics埋点
-- SEO优化(meta标签、sitemap)
-- 性能优化(图片压缩、代码压缩)
+- Add real product screenshots and demo video
+- Integrate email capture form
+- Add Google Analytics tracking
+- SEO optimization (meta tags, sitemap)
+- Performance optimization (image compression, code minification)
 
 ---
 
-**文档版本**: v1.0
-**创建日期**: 2026-02-10
-**负责人**: [待填写]
-**状态**: Draft
+**Document Version**: v1.0
+**Created**: 2026-02-10
+**Owner**: [TBD]
+**Status**: Draft
