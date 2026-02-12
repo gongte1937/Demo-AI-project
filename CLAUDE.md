@@ -97,11 +97,10 @@ See `docs/prd/frontend/README.md` section 6.2 for complete API contracts.
 ### Planned Tech Stack
 - Node.js 18+ LTS
 - TypeScript 5+
-- Express.js 4.18+
-- PostgreSQL 15+ (primary database)
-- Redis 7+ (sessions, caching)
-- Prisma (ORM)
-- S3/OSS (file storage)
+- NestJS 10+
+- PostgreSQL 15+ hosted on Supabase
+- Prisma (ORM, connects via Supabase connection pooler)
+- Supabase Storage (file storage)
 - OpenAI Whisper API (speech transcription)
 
 ### Database Schema (from PRD)
@@ -255,10 +254,11 @@ VITE_API_BASE_URL=http://localhost:3000/api/v1
 ```
 NODE_ENV=production
 PORT=3000
-DATABASE_URL=postgresql://...
-REDIS_URL=redis://...
+SUPABASE_URL=https://<project-ref>.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=...
+DATABASE_URL=postgresql://...(Supabase pooler, port 6543)
+DIRECT_URL=postgresql://...(Supabase direct, port 5432)
 JWT_SECRET=...
-AWS_S3_BUCKET=...
 OPENAI_API_KEY=...
 ```
 

@@ -1,10 +1,10 @@
 # Backend PRD - Temporary Plan Generator
-## Node.js TypeScript Express Server
+## Node.js TypeScript NestJS Server
 
 ## 1. Product Overview
 
 ### 1.1 Backend Role
-Provides RESTful API services for the Temporary Plan Generator, handling user authentication, voice file upload, AI transcription, data storage, and other core business logic.
+Provides RESTful API services for the Temporary Plan Generator, handling user authentication, voice file upload, AI transcription, and core business logic.
 
 ### 1.2 Core Responsibilities
 - User authentication and authorization
@@ -12,34 +12,36 @@ Provides RESTful API services for the Temporary Plan Generator, handling user au
 - Calling AI services for speech transcription
 - Extracting time information and key content
 - Idea data CRUD operations
-- Data persistence and caching
 
 ## 2. Tech Stack
 
 ### 2.1 Core Technologies
 - **Runtime**: Node.js 18+ LTS
 - **Language**: TypeScript 5+
-- **Web Framework**: Express.js 4.18+
-- **Database**: PostgreSQL 15+ (primary database)
-- **Cache**: Redis 7+ (sessions, caching)
-- **ORM**: Prisma / TypeORM
-- **File Storage**: AWS S3 / Alibaba Cloud OSS / MinIO
+- **Web Framework**: NestJS 10+
+- **Database**: PostgreSQL 15+ hosted on Supabase
+- **ORM**: Prisma (connects to Supabase via connection pooling)
+- **File Storage**: Supabase Storage
 - **AI Services**: OpenAI Whisper API / iFlytek Speech / Azure Speech
 
 ### 2.2 Core Dependencies
 ```json
 {
-  "express": "^4.18.0",
+  "@nestjs/core": "^10.0.0",
+  "@nestjs/common": "^10.0.0",
+  "@nestjs/platform-express": "^10.0.0",
+  "@nestjs/jwt": "^10.0.0",
+  "@nestjs/passport": "^10.0.0",
+  "passport-jwt": "^4.0.0",
   "typescript": "^5.3.0",
   "prisma": "^5.7.0",
   "@prisma/client": "^5.7.0",
-  "jsonwebtoken": "^9.0.0",
   "bcrypt": "^5.1.0",
   "multer": "^1.4.5-lts.1",
   "axios": "^1.6.0",
-  "redis": "^4.6.0",
-  "joi": "^17.11.0",
-  "winston": "^3.11.0"
+  "class-validator": "^0.14.0",
+  "class-transformer": "^0.5.0",
+  "@supabase/supabase-js": "^2.0.0"
 }
 ```
 
@@ -58,37 +60,64 @@ Provides RESTful API services for the Temporary Plan Generator, handling user au
        │
        ↓
 ┌─────────────────────────────┐
-│   Express Application       │
+│   NestJS Application        │
 │  ┌─────────────────────┐   │
-│  │  Auth Middleware    │   │
-│  ├─────────────────────┤   │
-│  │  Routes             │   │
+│  │  Guards / Pipes     │   │
 │  ├─────────────────────┤   │
 │  │  Controllers        │   │
 │  ├─────────────────────┤   │
 │  │  Services           │   │
+│  ├─────────────────────┤   │
+│  │  Modules            │   │
 │  └─────────────────────┘   │
-└────┬─────────┬──────────┬──┘
-     │         │          │
-     ↓         ↓          ↓
-┌─────────┐ ┌──────┐ ┌──────┐
-│PostgreSQL│ │Redis │ │ S3   │
-└─────────┘ └──────┘ └──────┘
+└────────────┬───────────────┘
+             │
+             ↓
+      ┌─────────────────────────┐
+      │       Supabase          │
+      │  ┌──────────────────┐  │
+      │  │  PostgreSQL DB   │  │
+      │  ├──────────────────┤  │
+      │  │  Storage (Files) │  │
+      │  └──────────────────┘  │
+      └─────────────────────────┘
 ```
 
 ### 3.2 Directory Structure
 ```
 src/
-├── config/           # Configuration files
-├── controllers/      # Request handlers
-├── services/         # Business logic
-├── models/           # Data models
-├── middlewares/      # Middleware
-├── routes/           # API routes
-├── utils/            # Utility functions
-├── validators/       # Data validation
-├── types/            # TypeScript type definitions
-└── app.ts            # App entry point
+├── auth/             # Authentication module
+│   ├── auth.module.ts
+│   ├── auth.controller.ts
+│   ├── auth.service.ts
+│   ├── jwt.strategy.ts
+│   └── dto/
+├── ideas/            # Ideas module
+│   ├── ideas.module.ts
+│   ├── ideas.controller.ts
+│   ├── ideas.service.ts
+│   └── dto/
+├── users/            # Users module
+│   ├── users.module.ts
+│   ├── users.controller.ts
+│   ├── users.service.ts
+│   └── dto/
+├── upload/           # File upload module
+│   ├── upload.module.ts
+│   ├── upload.controller.ts
+│   └── upload.service.ts
+├── ai/               # AI transcription module
+│   ├── ai.module.ts
+│   └── ai.service.ts
+├── prisma/           # Prisma service
+│   └── prisma.service.ts
+├── supabase/         # Supabase client
+│   └── supabase.service.ts
+├── common/           # Shared utilities
+│   ├── filters/      # Exception filters
+│   ├── guards/       # Auth guards
+│   └── pipes/        # Validation pipes
+└── main.ts           # App entry point
 ```
 
 ## 4. Database Design
@@ -129,15 +158,6 @@ model Idea {
 
   @@index([userId, timeCategory])
   @@index([userId, createdAt])
-}
-```
-
-#### Session Table (Redis)
-```typescript
-interface Session {
-  userId: string;
-  token: string;
-  expiresAt: number;
 }
 ```
 
@@ -365,7 +385,7 @@ Response:
    ↓
 2. Validate file format and size
    ↓
-3. Upload to object storage (S3)
+3. Upload to Supabase Storage
    ↓
 4. Call AI transcription service (OpenAI Whisper)
    ↓
@@ -420,7 +440,7 @@ async function transcribeAudio(audioUrl: string): Promise<string> {
 ## 7. Security Design
 
 ### 7.1 Authentication & Authorization
-- **JWT Token**: 7-day expiry, stored in Redis
+- **JWT Token**: 7-day expiry
 - **Password hashing**: bcrypt (salt rounds: 10)
 - **Rate limiting**: Restrict API request frequency
 - **CORS configuration**: Allow whitelisted domains only
@@ -433,46 +453,33 @@ async function transcribeAudio(audioUrl: string): Promise<string> {
 
 ### 7.3 Access Control
 ```typescript
-// Authentication middleware
-async function authenticate(req, res, next) {
-  const token = req.headers.authorization?.replace('Bearer ', '');
-  if (!token) return res.status(401).json({ error: 'Unauthorized' });
-
-  const decoded = jwt.verify(token, JWT_SECRET);
-  req.user = await prisma.user.findUnique({ where: { id: decoded.userId } });
-  next();
-}
+// JWT Auth Guard (NestJS)
+@Injectable()
+export class JwtAuthGuard extends AuthGuard('jwt') {}
 
 // Resource ownership validation
-async function authorizeIdeaOwner(req, res, next) {
-  const idea = await prisma.idea.findUnique({ where: { id: req.params.id } });
-  if (idea.userId !== req.user.id) {
-    return res.status(403).json({ error: 'Forbidden' });
+@Injectable()
+export class IdeaOwnerGuard implements CanActivate {
+  constructor(private prisma: PrismaService) {}
+
+  async canActivate(context: ExecutionContext): Promise<boolean> {
+    const request = context.switchToHttp().getRequest();
+    const idea = await this.prisma.idea.findUnique({
+      where: { id: request.params.id },
+    });
+    return idea?.userId === request.user.id;
   }
-  next();
 }
+
+// Usage in controller
+@UseGuards(JwtAuthGuard, IdeaOwnerGuard)
+@Delete(':id')
+async deleteIdea(@Param('id') id: string) { ... }
 ```
 
-## 8. Performance Optimization
+## 8. Error Handling
 
-### 8.1 Caching Strategy
-- **Redis cache**: User sessions, hot data
-- **Cache TTL**: User info (1 hour), idea list (5 minutes)
-- **Cache invalidation**: Proactively clear on data updates
-
-### 8.2 Database Optimization
-- **Indexes**: userId, timeCategory, createdAt
-- **Paginated queries**: Limit per-query result size
-- **Connection pooling**: Reuse database connections
-
-### 8.3 File Handling
-- **Async upload**: Background task queue (Bull)
-- **CDN acceleration**: Serve static assets via CDN
-- **File compression**: Compress audio files for storage
-
-## 9. Error Handling
-
-### 9.1 Unified Error Response
+### 8.1 Unified Error Response
 ```typescript
 {
   success: false,
@@ -484,7 +491,7 @@ async function authorizeIdeaOwner(req, res, next) {
 }
 ```
 
-### 9.2 Error Code Definitions
+### 8.2 Error Code Definitions
 ```typescript
 enum ErrorCode {
   UNAUTHORIZED = 'UNAUTHORIZED',
@@ -497,57 +504,92 @@ enum ErrorCode {
 }
 ```
 
-## 10. Logging & Monitoring
+### 8.3 Global Exception Filter (NestJS)
+```typescript
+@Catch()
+export class GlobalExceptionFilter implements ExceptionFilter {
+  catch(exception: unknown, host: ArgumentsHost) {
+    const ctx = host.switchToHttp();
+    const response = ctx.getResponse<Response>();
 
-### 10.1 Logging System
-Using Winston for logging:
+    const status = exception instanceof HttpException
+      ? exception.getStatus()
+      : HttpStatus.INTERNAL_SERVER_ERROR;
+
+    response.status(status).json({
+      success: false,
+      error: {
+        code: ErrorCode.INTERNAL_ERROR,
+        message: 'An unexpected error occurred',
+      },
+    });
+  }
+}
+```
+
+## 9. Logging & Monitoring
+
+### 9.1 Logging System
+Using NestJS built-in Logger:
 - **Error level**: System errors, exceptions
 - **Warn level**: Business warnings
 - **Info level**: Important operations (login, create, delete)
 - **Debug level**: Debug information (development only)
 
-### 10.2 Monitoring Metrics
+### 9.2 Monitoring Metrics
 - API response time
 - Database query latency
 - Error rate
 - AI transcription success rate
 - File upload success rate
 
-## 11. Testing
+## 10. Testing
 
-### 11.1 Unit Tests
+### 10.1 Unit Tests
 - Service layer coverage > 80%
-- Testing framework: Jest
+- Testing framework: Jest (NestJS built-in)
 - Mocks: database, external APIs
 
-### 11.2 Integration Tests
+### 10.2 Integration Tests
 - API end-to-end tests
-- Using Supertest
+- Using NestJS testing utilities + Supertest
 - Test database: PostgreSQL test instance
 
-### 11.3 Performance Tests
-- Load testing: Apache Bench / k6
-- Target: API response time < 500ms
+## 11. Deployment
 
-## 12. Deployment
-
-### 12.1 Environment Configuration
+### 11.1 Environment Configuration
 ```env
 NODE_ENV=production
 PORT=3000
-DATABASE_URL=postgresql://user:pass@host:5432/db
-REDIS_URL=redis://host:6379
+
+# Supabase
+SUPABASE_URL=https://<project-ref>.supabase.co
+SUPABASE_ANON_KEY=xxx
+SUPABASE_SERVICE_ROLE_KEY=xxx
+
+# Prisma connects via Supabase connection pooler (port 6543)
+DATABASE_URL=postgresql://postgres.[project-ref]:[password]@aws-0-[region].pooler.supabase.com:6543/postgres?pgbouncer=true
+DIRECT_URL=postgresql://postgres.[project-ref]:[password]@aws-0-[region].pooler.supabase.com:5432/postgres
+
 JWT_SECRET=xxx
-AWS_S3_BUCKET=xxx
 OPENAI_API_KEY=xxx
 ```
 
-### 12.2 Deployment Platforms
+> **Note**: Prisma requires both `DATABASE_URL` (pooled, for queries) and `DIRECT_URL` (direct, for migrations). Configure both in `prisma/schema.prisma`:
+> ```prisma
+> datasource db {
+>   provider  = "postgresql"
+>   url       = env("DATABASE_URL")
+>   directUrl = env("DIRECT_URL")
+> }
+> ```
+
+### 11.2 Deployment Platforms
 - **Recommended**: Railway / Render / Fly.io
 - **Alternatives**: AWS EC2 / DigitalOcean / Alibaba Cloud ECS
 - **Containerization**: Docker + Docker Compose
 
-### 12.3 CI/CD
+### 11.3 CI/CD
 ```yaml
 # GitHub Actions
 - Build TypeScript
@@ -556,19 +598,7 @@ OPENAI_API_KEY=xxx
 - Deploy to Production
 ```
 
-## 13. Extensibility Design
-
-### 13.1 Microservice Split (Future)
-- Auth service
-- Core business service
-- AI transcription service
-- File service
-
-### 13.2 Message Queue
-- Use Bull/BullMQ for async task processing
-- Tasks: AI transcription, email sending, data export
-
-## 14. Roadmap
+## 12. Roadmap
 
 ### Phase 1: MVP (4 weeks)
 - User authentication API
@@ -578,18 +608,12 @@ OPENAI_API_KEY=xxx
 
 ### Phase 2: Feature Completion (3 weeks)
 - Search API
-- Time extraction optimization
+- Time extraction improvement
 - Tag system
-- Cache optimization
-
-### Phase 3: Performance Optimization (2 weeks)
-- Database optimization
-- Redis caching
-- Async task queue
-- Monitoring & alerting
 
 ---
 
-**Document Version**: v1.0
+**Document Version**: v1.1
 **Created**: 2026-02-10
+**Updated**: 2026-02-12
 **Status**: Draft
