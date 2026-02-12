@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { GlobalExceptionFilter } from './common/filters/global-exception.filter';
+import { corsConfig } from './config/cors.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -18,12 +19,7 @@ async function bootstrap() {
 
   app.useGlobalFilters(new GlobalExceptionFilter());
 
-  app.enableCors({
-    origin: process.env.NODE_ENV === 'production'
-      ? ['https://your-frontend-domain.com']
-      : ['http://localhost:5173', 'http://localhost:3001'],
-    credentials: true,
-  });
+  app.enableCors(corsConfig);
 
   const port = process.env.PORT ?? 3000;
   await app.listen(port);

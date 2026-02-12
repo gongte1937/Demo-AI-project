@@ -1,0 +1,212 @@
+# Echolater Backend API Tests
+# Requires VS Code REST Client extension (humao.rest-client)
+# Usage: Click "Send Request" above each request
+
+@baseUrl = http://localhost:3000/api
+@token = YOUR_JWT_TOKEN_HERE
+
+###############################################
+# AUTH
+###############################################
+
+### Register
+# @name register
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "demo@echolater.com",
+  "password": "Demo12345",
+  "nickname": "Demo User"
+}
+
+###
+
+### Login
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "demo@echolater.com",
+  "password": "Demo12345"
+}
+
+# After login, copy the token from the response and set:
+# @token = <paste token here>
+
+###
+
+### Logout
+POST {{baseUrl}}/auth/logout
+Authorization: Bearer {{token}}
+
+###############################################
+# USER
+###############################################
+
+### Get Profile
+GET {{baseUrl}}/user/profile
+Authorization: Bearer {{token}}
+
+###
+
+### Update Profile
+PUT {{baseUrl}}/user/profile
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nickname": "Updated Name"
+}
+
+###
+
+### Change Password
+POST {{baseUrl}}/user/change-password
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "oldPassword": "Demo12345",
+  "newPassword": "NewDemo12345"
+}
+
+###############################################
+# IDEAS
+###############################################
+
+### Get All Ideas
+GET {{baseUrl}}/ideas
+Authorization: Bearer {{token}}
+
+###
+
+### Get Ideas - Filter by timeCategory
+GET {{baseUrl}}/ideas?timeCategory=inbox
+Authorization: Bearer {{token}}
+
+###
+
+### Get Ideas - Filter by today
+GET {{baseUrl}}/ideas?timeCategory=today
+Authorization: Bearer {{token}}
+
+###
+
+### Get Ideas - Paginated
+GET {{baseUrl}}/ideas?page=1&limit=10
+Authorization: Bearer {{token}}
+
+###
+
+### Get Ideas - Search
+GET {{baseUrl}}/ideas?search=meeting
+Authorization: Bearer {{token}}
+
+###
+
+### Get Ideas - Completed only
+GET {{baseUrl}}/ideas?isCompleted=true
+Authorization: Bearer {{token}}
+
+###
+
+### Get Single Idea
+# Replace with a real idea ID after creating one
+GET {{baseUrl}}/ideas/IDEA_ID_HERE
+Authorization: Bearer {{token}}
+
+###
+
+### Update Idea
+PUT {{baseUrl}}/ideas/IDEA_ID_HERE
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "transcription": "Updated transcription text",
+  "timeCategory": "today",
+  "tags": ["work", "urgent"],
+  "isCompleted": false
+}
+
+###
+
+### Mark Idea as Completed
+PUT {{baseUrl}}/ideas/IDEA_ID_HERE
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "isCompleted": true
+}
+
+###
+
+### Delete Idea
+DELETE {{baseUrl}}/ideas/IDEA_ID_HERE
+Authorization: Bearer {{token}}
+
+###############################################
+# UPLOAD
+###############################################
+
+### Upload Audio File
+# Note: Replace /path/to/audio.webm with a real file path
+POST {{baseUrl}}/upload/audio
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="test.webm"
+Content-Type: audio/webm
+
+< /path/to/test-audio.webm
+--boundary--
+
+###############################################
+# ERROR CASES
+###############################################
+
+### Register with duplicate email (expect 409)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "demo@echolater.com",
+  "password": "Demo12345"
+}
+
+###
+
+### Login with wrong password (expect 401)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "demo@echolater.com",
+  "password": "WrongPassword"
+}
+
+###
+
+### Access protected route without token (expect 401)
+GET {{baseUrl}}/user/profile
+
+###
+
+### Access other user's idea (expect 403)
+GET {{baseUrl}}/ideas/NON_OWNED_IDEA_ID
+Authorization: Bearer {{token}}
+
+###
+
+### Validation error - short password (expect 400)
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "test2@echolater.com",
+  "password": "short"
+}
