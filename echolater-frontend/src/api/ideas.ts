@@ -1,29 +1,88 @@
-/**
- * Mock API layer — mirrors the real backend API contract.
- * Swap these functions with real axios calls when the backend is ready.
- *
- * Real backend base URL: import.meta.env.VITE_API_BASE_URL
- */
+import { apiClient } from '@/lib/http';
 import type { Idea, TimeCategory } from '@/types';
-import { MOCK_IDEAS, MOCK_TRANSCRIPTIONS } from './mock-data';
-import { categorizeByTime } from '@/utils/time';
-import dayjs from 'dayjs';
 
-// Simulate network latency
-const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
+interface BackendIdea {
+  id: string;
+  audioUrl: string;
+  audioDuration: number;
+  transcription: string;
+  extractedTime: string | null;
+  timeCategory: string;
+  tags: string[];
+  isCompleted: boolean;
+  completedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
 
-let store: Idea[] = [...MOCK_IDEAS];
+interface ApiEnvelope<T> {
+  success: boolean;
+  data: T;
+}
 
-// ─── Ideas ────────────────────────────────────────────────────────────────────
+interface PagedIdeasData {
+  ideas: BackendIdea[];
+  pagination: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
+function normalizeCategory(value: string): TimeCategory {
+  if (value === 'today' || value === 'thisWeek' || value === 'future' || value === 'inbox') {
+    return value;
+  }
+  return 'inbox';
+}
+
+function mapIdea(idea: BackendIdea, overrides?: Partial<Idea>): Idea {
+  return {
+    id: idea.id,
+    audioUrl: idea.audioUrl ?? null,
+    audioBlobUrl: null,
+    audioDuration: idea.audioDuration ?? 0,
+    transcription: idea.transcription ?? '',
+    manualNote: '',
+    extractedTime: idea.extractedTime ?? null,
+    timeCategory: normalizeCategory(idea.timeCategory),
+    tags: Array.isArray(idea.tags) ? idea.tags : [],
+    isCompleted: Boolean(idea.isCompleted),
+    completedAt: idea.completedAt ?? null,
+    createdAt: idea.createdAt,
+    updatedAt: idea.updatedAt,
+    ...overrides,
+  };
+}
+
+async function fetchIdeasPage(page: number, limit: number): Promise<PagedIdeasData> {
+  const res = await apiClient.get<ApiEnvelope<PagedIdeasData>>('/ideas', {
+    params: { page, limit },
+  });
+  return res.data.data;
+}
 
 export async function fetchIdeas(): Promise<Idea[]> {
-  await delay(400);
-  return [...store].sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1));
+  const limit = 50;
+  const first = await fetchIdeasPage(1, limit);
+  let all = [...first.ideas];
+
+  for (let page = 2; page <= first.pagination.totalPages; page += 1) {
+    const next = await fetchIdeasPage(page, limit);
+    all = all.concat(next.ideas);
+  }
+
+  return all.map((idea) => mapIdea(idea));
 }
 
 export async function fetchIdeaById(id: string): Promise<Idea | null> {
-  await delay(200);
-  return store.find((i) => i.id === id) ?? null;
+  try {
+    const res = await apiClient.get<ApiEnvelope<{ idea: BackendIdea }>>(`/ideas/${id}`);
+    return mapIdea(res.data.data.idea);
+  } catch {
+    return null;
+  }
 }
 
 export async function createIdea(payload: {
@@ -31,82 +90,65 @@ export async function createIdea(payload: {
   audioDuration: number;
   manualNote: string;
 }): Promise<Idea> {
-  await delay(300);
-
-  // Simulate transcription processing
-  await delay(1800);
-
-  const transcription =
-    MOCK_TRANSCRIPTIONS[Math.floor(Math.random() * MOCK_TRANSCRIPTIONS.length)];
-
-  // Mock time extraction — 60% chance of finding a time
-  const hasTime = Math.random() > 0.4;
-  let extractedTime: string | null = null;
-  let timeCategory: TimeCategory = 'inbox';
-
-  if (hasTime) {
-    const daysOffset = [0, 1, 2, 5, 14, 30][Math.floor(Math.random() * 6)];
-    extractedTime = dayjs().add(daysOffset, 'day').toISOString();
-    timeCategory = categorizeByTime(extractedTime);
+  if (!payload.audioBlob) {
+    throw new Error('Audio is required');
   }
 
-  const audioBlobUrl = payload.audioBlob ? URL.createObjectURL(payload.audioBlob) : null;
+  const formData = new FormData();
+  const file = new File([payload.audioBlob], `recording-${Date.now()}.webm`, {
+    type: payload.audioBlob.type || 'audio/webm',
+  });
+  formData.append('audio', file);
+  if (payload.manualNote.trim()) {
+    formData.append('manualNote', payload.manualNote.trim());
+  }
 
-  const newIdea: Idea = {
-    id: crypto.randomUUID(),
-    audioUrl: null, // would be an S3 URL in production
-    audioBlobUrl,
-    audioDuration: payload.audioDuration,
-    transcription,
-    manualNote: payload.manualNote,
-    extractedTime,
-    timeCategory,
-    tags: [],
-    isCompleted: false,
-    completedAt: null,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  };
+  const res = await apiClient.post<ApiEnvelope<{ idea: BackendIdea }>>('/ideas', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
 
-  store = [newIdea, ...store];
-  return newIdea;
+  const mapped = mapIdea(res.data.data.idea, {
+    manualNote: payload.manualNote.trim(),
+  });
+
+  if (mapped.audioDuration === 0 && payload.audioDuration > 0) {
+    mapped.audioDuration = payload.audioDuration;
+  }
+
+  return mapped;
 }
 
 export async function updateIdea(id: string, data: Partial<Idea>): Promise<Idea> {
-  await delay(250);
-  const idx = store.findIndex((i) => i.id === id);
-  if (idx === -1) throw new Error(`Idea ${id} not found`);
+  const payload: Record<string, unknown> = {};
 
-  const updated: Idea = {
-    ...store[idx],
-    ...data,
-    updatedAt: new Date().toISOString(),
-  };
+  if (typeof data.transcription === 'string') payload.transcription = data.transcription;
+  if (typeof data.extractedTime === 'string') payload.extractedTime = data.extractedTime;
+  if (typeof data.timeCategory === 'string') payload.timeCategory = data.timeCategory;
+  if (Array.isArray(data.tags)) payload.tags = data.tags;
+  if (typeof data.isCompleted === 'boolean') payload.isCompleted = data.isCompleted;
 
-  // Recalculate time category if extractedTime changed
-  if (data.extractedTime !== undefined) {
-    updated.timeCategory = categorizeByTime(data.extractedTime);
+  if (Object.keys(payload).length === 0) {
+    const current = await fetchIdeaById(id);
+    if (!current) throw new Error('Idea not found');
+    return {
+      ...current,
+      manualNote: typeof data.manualNote === 'string' ? data.manualNote : current.manualNote,
+    };
   }
 
-  store = store.map((i) => (i.id === id ? updated : i));
-  return updated;
+  const res = await apiClient.put<ApiEnvelope<{ idea: BackendIdea }>>(`/ideas/${id}`, payload);
+  return mapIdea(res.data.data.idea, {
+    manualNote: typeof data.manualNote === 'string' ? data.manualNote : '',
+  });
 }
 
 export async function deleteIdea(id: string): Promise<void> {
-  await delay(250);
-  // Revoke blob URL to free memory
-  const idea = store.find((i) => i.id === id);
-  if (idea?.audioBlobUrl) URL.revokeObjectURL(idea.audioBlobUrl);
-  store = store.filter((i) => i.id !== id);
+  await apiClient.delete(`/ideas/${id}`);
 }
 
 export async function searchIdeas(query: string): Promise<Idea[]> {
-  await delay(300);
-  const q = query.toLowerCase();
-  return store.filter(
-    (i) =>
-      i.transcription.toLowerCase().includes(q) ||
-      i.manualNote.toLowerCase().includes(q) ||
-      i.tags.some((t) => t.toLowerCase().includes(q)),
-  );
+  const res = await apiClient.get<ApiEnvelope<PagedIdeasData>>('/ideas', {
+    params: { search: query, page: 1, limit: 50 },
+  });
+  return res.data.data.ideas.map((idea) => mapIdea(idea));
 }

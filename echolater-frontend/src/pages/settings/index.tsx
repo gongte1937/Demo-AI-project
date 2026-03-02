@@ -1,23 +1,41 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Moon, Sun, Download, Trash2, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
+import { Input } from '@/components/ui/input';
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription,
 } from '@/components/ui/dialog';
 import { useThemeStore } from '@/stores/useThemeStore';
 import { useIdeaStore } from '@/stores/useIdeaStore';
+import { useAuthStore } from '@/stores/useAuthStore';
 import { exportAsJSON, exportAsCSV } from '@/utils/export';
 import { toast } from '@/components/ui/use-toast';
 
 export default function SettingsPage() {
+  const navigate = useNavigate();
   const { theme, toggleTheme } = useThemeStore();
-  const { ideas } = useIdeaStore();
+  const { ideas, clearIdeas } = useIdeaStore();
+  const {
+    user,
+    updateProfile,
+    logout,
+    loading: authLoading,
+  } = useAuthStore();
   const [confirmClear, setConfirmClear] = useState(false);
+  const [nickname, setNickname] = useState('');
+  const [avatar, setAvatar] = useState('');
 
   const isDark = theme === 'dark';
+
+  useEffect(() => {
+    setNickname(user?.nickname ?? '');
+    setAvatar(user?.avatar ?? '');
+  }, [user]);
 
   function handleExportJSON() {
     exportAsJSON(ideas);
@@ -35,6 +53,29 @@ export default function SettingsPage() {
     window.location.reload();
   }
 
+  async function handleSaveProfile() {
+    try {
+      await updateProfile({
+        nickname: nickname.trim() || undefined,
+        avatar: avatar.trim() || undefined,
+      });
+      toast({ title: 'Profile updated' });
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Could not save profile';
+      toast({
+        variant: 'destructive',
+        title: 'Save failed',
+        description: message,
+      });
+    }
+  }
+
+  async function handleLogout() {
+    await logout();
+    clearIdeas();
+    navigate('/login', { replace: true });
+  }
+
   return (
     <div className="flex flex-col h-full max-w-2xl mx-auto">
       {/* Header */}
@@ -43,6 +84,47 @@ export default function SettingsPage() {
       </header>
 
       <div className="flex-1 overflow-y-auto px-4 py-5 space-y-6">
+
+        {/* Account */}
+        <section className="space-y-3">
+          <h2 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+            Account
+          </h2>
+          <div className="rounded-xl border border-border bg-card p-4 space-y-3">
+            <div className="space-y-1.5">
+              <Label>Email</Label>
+              <Input value={user?.email ?? ''} readOnly />
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="nickname">Nickname</Label>
+              <Input
+                id="nickname"
+                value={nickname}
+                onChange={(e) => setNickname(e.target.value)}
+                placeholder="Your display name"
+              />
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="avatar">Avatar URL</Label>
+              <Input
+                id="avatar"
+                value={avatar}
+                onChange={(e) => setAvatar(e.target.value)}
+                placeholder="https://..."
+              />
+            </div>
+            <div className="flex gap-2 pt-1">
+              <Button variant="outline" onClick={handleSaveProfile} disabled={authLoading}>
+                {authLoading ? 'Saving…' : 'Save Profile'}
+              </Button>
+              <Button variant="destructive" onClick={handleLogout}>
+                Logout
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        <Separator />
 
         {/* Appearance */}
         <section className="space-y-3">

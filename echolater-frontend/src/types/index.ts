@@ -30,3 +30,10 @@ export interface AppSettings {
   theme: Theme;
   recordingQuality: RecordingQuality;
 }
+
+export interface AuthUser {
+  id: string;
+  email: string;
+  nickname: string | null;
+  avatar: string | null;
+}

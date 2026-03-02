@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import type { Idea } from '@/types';
 import * as api from '@/api/ideas';
+import { extractApiErrorMessage } from '@/lib/http';
 
 interface IdeaState {
   ideas: Idea[];
@@ -12,6 +13,7 @@ interface IdeaState {
   updateIdea: (id: string, data: Partial<Idea>) => Promise<void>;
   deleteIdea: (id: string) => Promise<void>;
   toggleComplete: (id: string) => Promise<void>;
+  clearIdeas: () => void;
 }
 
 export const useIdeaStore = create<IdeaState>((set, get) => ({
@@ -24,8 +26,8 @@ export const useIdeaStore = create<IdeaState>((set, get) => ({
     try {
       const ideas = await api.fetchIdeas();
       set({ ideas, loading: false });
-    } catch (e) {
-      set({ error: 'Failed to load ideas', loading: false });
+    } catch (error) {
+      set({ error: extractApiErrorMessage(error, 'Failed to load ideas'), loading: false });
     }
   },
 
@@ -51,5 +53,9 @@ export const useIdeaStore = create<IdeaState>((set, get) => ({
       completedAt: !idea.isCompleted ? new Date().toISOString() : null,
     };
     await get().updateIdea(id, data);
+  },
+
+  clearIdeas: () => {
+    set({ ideas: [], loading: false, error: null });
   },
 }));
